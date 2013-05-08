@@ -7,6 +7,6 @@
  */
 include_once '../include/connexion.php';
 class type_nage {
-    //put your code here
+    
 }
 
