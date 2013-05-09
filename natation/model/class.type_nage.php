@@ -57,23 +57,39 @@ class type_nage {
 
     /**
      * Supprime un type par son ID
-     * @param int $id_type
+     * @param int $id_type_nage
      */
-    public static function supprimer($id_type) {
-        mysql_query("DELELE FROM `" . self::$table . "` WHERE `" . self::$cle_primaire . "` = $id_type") or die(mysql_error());
+    public static function supprimer($id_type_nage) {
+        mysql_query("DELELE FROM `" . self::$table . "` WHERE `" . self::$cle_primaire . "` = $id_type_nage") or die(mysql_error());
         return true;
     }
 
+   /**
+     * Recherche un type de nage par son id
+     * @param int $id_type_nage l'id du type de nage
+     * @return boolean | array, false si aucun type correspondant n'a ete trouve, sinon retourne la ligne correspondante au type de nage
+     */
+    public static function rechercherParId($id_type_nage) {
+        $res = mysql_query("SELECT * FROM `" . self::$table . "` WHERE `".self::$cle_primaire."` =  '$id_type_nage'") or die(mysql_error());
+        if (mysql_num_rows($res) != 0) {
+            return mysql_fetch_array($res);
+        }
+        return false;
+    }
     /**
      * Recherche par type de nage
      * @param string $type le type a rechercher
-     * @return boolean | array,  false si le type n'a pas ete trouve ou un tableau correspondant
-     * a la ligne contenant le type
+     * @return boolean | array,  false si le type n'a pas ete trouve ou tous les types de nage correspondant au type
      */
     public static function rechercherParType($type) {
-        $res = mysql_query("SELECT * FROM `" . self::$table . "` WHERE `type` =  '$type'") or die(mysql_error());
+        $res = mysql_query("SELECT * FROM `" . self::$table . "` WHERE `type` LIKE  '%$type%'") or die(mysql_error());
         if (mysql_num_rows($res) != 0) {
-            return mysql_fetch_array($res);
+            $types = array();
+            //Recuperer toutes les lignes trouvees
+            while (($ligne = mysql_fetch_array($res)) !== FALSE) {
+                $types[] = $ligne;
+            }
+            return $types;
         }
         return false;
     }

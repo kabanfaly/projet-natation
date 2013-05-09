@@ -61,6 +61,19 @@ class performance {
     }
 
     /**
+     * Recherche les performances par son id
+     * @param int $id_performance l'id de la performance
+     * @return boolean | array, false si aucune performance correspondante n'a ete trouvee, sinon retourne la ligne correspondante
+     * a la performance
+     */
+    public static function rechercherParId($id_performance) {
+        $res = mysql_query("SELECT * FROM `".self::$table."` WHERE `".self::$cle_primaire."` =  '$id_performance'") or die(mysql_error());
+        if (mysql_num_rows($res) != 0) {           
+            return mysql_fetch_array($res);
+        }
+        return false;
+    }
+    /**
      * Recherche les performances d'un nageur
      * @param int $id_nageur l'id du nageur
      * @return boolean | array, false si aucune performance correspondante n'a ete trouvee, sinon retourne les performances du nageur 

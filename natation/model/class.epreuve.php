@@ -37,7 +37,7 @@ class epreuve {
         //Recherche si l'element a enregistrer existe dans la table courante
         $res = mysql_query("SELECT * FROM `" . self::$table . "` WHERE `idtype_de_nage` =  '$id_type_de_nage' AND `distance` = '$distance'") or die(mysql_error());
 
-        //Exception si le l'epreuve existe 
+        //Exception si l'epreuve existe 
         if (mysql_num_rows($res) != 0) {
             throw new Exception("Ce type existe deja");
         }
@@ -54,7 +54,8 @@ class epreuve {
      * @return boolean true si modification OK
      */
     public static function modifier($id_epreuve, $id_type_nage, $distance) {
-        mysql_query("UPDATE `" . self::$table . "` SET `idtype_de_nage` = '$id_type_nage', `distance` = '$distance' WHERE `" . self::$cle_primaire . "` = '$id_epreuve'") or die(mysql_error());
+        mysql_query("UPDATE `" . self::$table . "` SET `idtype_de_nage` = '$id_type_nage', `distance` = '$distance' WHERE `" .
+                self::$cle_primaire . "` = '$id_epreuve'") or die(mysql_error());
         return true;
     }
 
@@ -67,6 +68,18 @@ class epreuve {
         return true;
     }
 
+    /**
+     * Recherche une epreuve par son id
+     * @param int $id_epreuve l'id de l'epreuve
+     * @return boolean | array, false si aucune epreuve correspondante n'a ete trouvee, sinon retourne la ligne correspondante a l'epreuve
+     */
+    public static function rechercherParId($id_epreuve) {
+        $res = mysql_query("SELECT * FROM `".self::$table."` WHERE `".self::$cle_primaire."` =  '$id_epreuve'") or die(mysql_error());
+        if (mysql_num_rows($res) != 0) {           
+            return mysql_fetch_array($res);
+        }
+        return false;
+    }
     /**
      * Recherche une epreuve par type de nage
      * @param int $id_type_de_nage le type a rechercher
