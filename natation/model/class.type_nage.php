@@ -10,23 +10,19 @@ include_once '../include/connexion.php';
 class type_nage {
 
     /**
-     * Le type de nage
-     * @var string
-     */
-    private $type;
-    /**
      * Nom de la table dans la base de donnees
      * @var string 
      */
-    private $table = 'type_de_nage';
+    private static $table = 'type_de_nage';
+
     /**
-     * Nom de la cle primaire de la table
+     * Nom de la colonne cle primaire de la table
      * @var string 
      */
-    private $cle_primaire = 'id_type_de_nage';
+    private static $cle_primaire = 'idtype_de_nage';
 
-    function __construct($type) {
-        $this->type = $type;
+    function __construct() {
+        
     }
 
     /**
@@ -35,35 +31,70 @@ class type_nage {
      * @return boolean true si enregistrement ok
      * @throws Exception si le type existe deja
      */
-    public function enregistrer() {
+    public static function enregistrer($type) {
         //Recherche si l'element a enregistrer existe dans la table courante
-        $res = mysql_query("SELECT * FROM `$this->table` WHERE `type` =  '$this->type'") or die(mysql_error());
-        
+        $res = mysql_query("SELECT * FROM `" . self::$table . "` WHERE `type` =  '$type'") or die(mysql_error());
+
         //Exception si le type existe 
         if (mysql_num_rows($res) != 0) {
             throw new Exception("Ce type existe deja");
         }
         //si le type n'existe pas on l'enregistre
-        mysql_query("INSERT INTO `$this->table` (`type`) VALUES ('$this->type')") or die(mysql_error());
+        mysql_query("INSERT INTO `" . self::$table . "` (`type`) VALUES ('$type')") or die(mysql_error());
         return true;
     }
+
     /**
-     * Modifie le type courant
+     * Modifie le type courant suivant l'id 
+     * @param int $idtype_nage l'id du type
      * @param string $nouveau_type le nouveau type
      * @return boolean true si modification OK
      */
-    public function modifier($nouveau_type){
-        mysql_query("UPDATE `$this->table` SET `type` = '$nouveau_type' WHERE `type` = '$this->type'") or die(mysql_error());
+    public static function modifier($id_type_nage, $nouveau_type) {
+        mysql_query("UPDATE `" . self::$table . "` SET `type` = '$nouveau_type' WHERE `" . self::$cle_primaire . "` = '$id_type_nage'") or die(mysql_error());
         return true;
     }
 
     /**
      * Supprime un type par son ID
-     * @param int $idType
+     * @param int $id_type
      */
-    public static function  supprimerParId($idType){
-        mysql_query("DELELE FROM `$this->type` WHERE `$this->cle_primaire` = $idType") or die(mysql_error());
+    public static function supprimer($id_type) {
+        mysql_query("DELELE FROM `" . self::$table . "` WHERE `" . self::$cle_primaire . "` = $id_type") or die(mysql_error());
         return true;
     }
+
+    /**
+     * Recherche par type de nage
+     * @param string $type le type a rechercher
+     * @return boolean | array,  false si le type n'a pas ete trouve ou un tableau correspondant
+     * a la ligne contenant le type
+     */
+    public static function rechercherParType($type) {
+        $res = mysql_query("SELECT * FROM `" . self::$table . "` WHERE `type` =  '$type'") or die(mysql_error());
+        if (mysql_num_rows($res) != 0) {
+            return mysql_fetch_array($res);
+        }
+        return false;
+    }
+
+    /**
+     * Recherche tous les types
+     * @return boolean | array
+     */
+    public static function rechercherTout() {
+        //Recuperer tous les types
+        $res = mysql_query("SELECT * FROM `" . self::$table . "`") or die(mysql_error());
+        if (mysql_num_rows($res) != 0) {
+            $types = array();
+            //Recuperer toutes les lignes trouvees
+            while (($ligne = mysql_fetch_array($res)) !== FALSE) {
+                $types[] = $ligne;
+            }
+            return $types;
+        }
+        return false;
+    }
+
 }
 

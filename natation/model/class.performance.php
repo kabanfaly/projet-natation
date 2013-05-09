@@ -6,62 +6,133 @@
  * @author kaba
  */
 include_once '../include/connexion.php';
+
 class performance {
-    
+
     /**
-     * Nom de la cle primaire de la table
+     * Nom de la colonne cle primaire de la table
      * @var string 
      */
-    private $cle_primaire = 'idperformance';
+    private static $cle_primaire = 'idperformance';
+
     /**
      * Nom de la table
      * @var string 
      */
-    private $table = 'performance';
-    /**
-     * Le nombre de points
-     * @var int 
-     */
-    private $points;
-    /**
-     * Le temps (chrono)
-     * @var string
-     */
-    private $temps;
-    /**
-     * L'id du nageur
-     * @var int 
-     */
-    private $id_nageur;
-    /**
-     * L'id de l'epreuve
-     * @var int 
-     */
-    private $id_epreuve;
-            
-    function __construct($points, $temps, $id_nageur, $id_epreuve) {
-        $this->points = $points;
-        $this->temps = $temps;
-        $this->id_nageur = $id_nageur;
-        $this->id_epreuve = $id_epreuve;
+    private static $table = 'performance';
+
+
+    function __construct() {
     }
-    
+
     /**
-     * 
+     * Ajoute une nouvelle performance
      * @return boolean
      * @throws Exception
      */
-    public function enregistrer() {
-        //Recherche si l'element a enregistrer existe dans la table courante
-        $res = mysql_query("SELECT * FROM `$this->table` WHERE `type` =  '$this->type'") or die(mysql_error());
-        
-        //Exception si le type existe 
-        if (mysql_num_rows($res) != 0) {
-            throw new Exception("Ce type existe deja");
-        }
-        //si le type n'existe pas on l'enregistre
-        mysql_query("INSERT INTO `$this->table` (`type`) VALUES ('$this->type')") or die(mysql_error());
+    public static function enregistrer($points, $temps, $id_nageur, $id_epreuve) {
+        mysql_query("INSERT INTO `".self::$table."` (`points`, `temps`, `idnageur`, `idepreuve`) VALUES "
+                        . "('$points', '$temps', '$id_nageur', '$id_epreuve')") or die(mysql_error());
         return true;
+    }
+
+    /**
+     * Modification d'une performance suivant l'id
+     * @param type $idperformance
+     * @param type $points
+     * @param type $temps
+     * @param type $id_nageur
+     * @param type $id_epreuve
+     * @return boolean
+     */
+    public static function modifier($idperformance, $points, $temps, $id_nageur, $id_epreuve) {
+        mysql_query("UPDATE `".self::$table."` SET `points` = '$points', `temps` = '$temps', `idnageur` = '$id_nageur', `idepreuve` = '$id_epreuve'"
+                        . " WHERE `".self::$cle_primaire."` = '$idperformance'") or die(mysql_error());
+        return true;
+    }
+
+    /**
+     * Supprime une performance
+     * @param type $id_performance
+     */
+    public static function supprimer($id_performance) {
+        mysql_query("DELELE FROM `".self::$table."` WHERE `".self::$cle_primaire."` = $id_performance") or die(mysql_error());
+        return true;
+    }
+
+    /**
+     * Recherche les performances d'un nageur
+     * @param int $id_nageur l'id du nageur
+     * @return boolean | array, false si aucune performance correspondante n'a ete trouvee, sinon retourne les performances du nageur 
+     * dans un tableau
+     */
+    public static function rechercherParNageur($id_nageur) {
+        $res = mysql_query("SELECT * FROM `".self::$table."` WHERE `idnageur` =  '$id_nageur'") or die(mysql_error());
+        if (mysql_num_rows($res) != 0) {
+            $performances = array();
+            //Recuperer toutes les lignes trouves
+            while (($ligne = mysql_fetch_array($res)) !== FALSE) {
+                $performances[] = $ligne;
+            }
+            return $performances;
+        }
+        return false;
+    }
+
+    /**
+     * Recherche les performances d'une epreuve
+     * @param int $idepreuve l'id de l'epreuve
+     * @return boolean | array, false si aucune performance correspondante n'a ete trouvee, sinon retourne les performances du nageur 
+     * dans un tableau
+     */
+    public static function rechercherParEpreuve($idepreuve) {
+        $res = mysql_query("SELECT * FROM `".self::$table."` WHERE `idepreuve` =  '$idepreuve'") or die(mysql_error());
+        if (mysql_num_rows($res) != 0) {
+            $performances = array();
+            //Recuperer toutes les lignes trouves
+            while (($ligne = mysql_fetch_array($res)) !== FALSE) {
+                $performances[] = $ligne;
+            }
+            return $performances;
+        }
+        return false;
+    }
+    /**
+     * Recherche les performances d'un nageur pour une epreuve donnee
+     * @param int $idnageur l'id du nageur
+     * @param int $idepreuve l'id de l'epreuve
+     * @return boolean | array, false si aucune performance correspondante n'a ete trouvee suivant l'epreuve, sinon retourne les performances du nageur 
+     * dans un tableau
+     */
+    public static function rechercherParNageurEpreuve($idnageur, $idepreuve){
+        $res = mysql_query("SELECT * FROM `".self::$table."` WHERE `idnageur` =  '$idnageur' AND `idepreuve` =  '$idepreuve'") or die(mysql_error());
+        if (mysql_num_rows($res) != 0) {
+            $performances = array();
+            //Recuperer toutes les lignes trouves
+            while (($ligne = mysql_fetch_array($res)) !== FALSE) {
+                $performances[] = $ligne;
+            }
+            return $performances;
+        }
+        return false;
+    }
+    
+    /**
+     * Recherche toutes les performances
+     * @return boolean | array
+     */
+    public static function rechercherTout(){
+         //Recuperer toutes les performances
+        $res = mysql_query("SELECT * FROM `".self::$table."`") or die(mysql_error());
+        if (mysql_num_rows($res) != 0) {
+            $performances = array();
+            //Recuperer toutes les lignes trouvees
+            while (($ligne = mysql_fetch_array($res)) !== FALSE) {
+                $performances[] = $ligne;
+            }
+            return $performances;
+        }
+        return false;
     }
 }
 
