@@ -1,0 +1,68 @@
+/* 
+    Document   : style
+    Created on : 9 mai 2013, 18:40:46
+    Author     : kaba
+    Description:
+        Purpose of the stylesheet follows.
+*/
+body{
+
+}
+#all{
+    width: 900px;
+    min-height: 600px;
+    /*border: blue solid 1px;*/
+}
+#header{
+    font-family: cursive;
+    width: 100%;
+    height: 200px;   
+    /*border: blue solid 1px;*/
+}
+.logo{
+    height: 157px;
+    background: url(../images/entete.png) no-repeat;
+}
+.menuH li{
+    float: right;
+    list-style: none;
+    margin-right: 5px;
+    width: 110px;
+    height: 30px;
+    text-align: center;
+    background-color: appworkspace;
+    border: solid 1px black;
+    text-decoration: none;
+}
+.menuH li:hover{
+    background-color: greenyellow;
+}
+
+#principal{
+    min-height: 300px;
+    width: 100%;
+    margin-top: 10px;
+    /*border: bisque solid 1px;*/
+}
+.menuV {
+    width: 20%;
+    min-height: 300px;
+    float: left;
+    border: solid 1px grey;
+}
+.contenu{
+    width: 78%;
+    border: solid 1px grey;
+    min-height: 300px;
+    margin-left: 22%;
+}
+#pied_de_page{
+    width: 100%;
+    height: 50px;
+    margin-top: 10px;
+    border: solid 1px grey;
+}
+#current{
+    background-color: green;  
+    color: white;
+}

@@ -28,7 +28,6 @@ class performance {
     /**
      * Ajoute une nouvelle performance
      * @return boolean
-     * @throws Exception
      */
     public static function enregistrer($points, $temps, $id_nageur, $id_epreuve) {
         mysql_query("INSERT INTO `".self::$table."` (`points`, `temps`, `idnageur`, `idepreuve`) VALUES "
@@ -38,11 +37,11 @@ class performance {
 
     /**
      * Modification d'une performance suivant l'id
-     * @param type $idperformance
-     * @param type $points
-     * @param type $temps
-     * @param type $id_nageur
-     * @param type $id_epreuve
+     * @param int $idperformance
+     * @param int $points
+     * @param string $temps
+     * @param int $id_nageur
+     * @param int $id_epreuve
      * @return boolean
      */
     public static function modifier($idperformance, $points, $temps, $id_nageur, $id_epreuve) {

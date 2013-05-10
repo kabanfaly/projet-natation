@@ -30,6 +30,12 @@ class competition {
      * @throws Exception
      */
     public static function enregistrer($annee, $idcategorie_maitre, $id_nageur, $id_epreuve) {
+        // Rechercher la competition si elle existe
+        $res =  mysql_query("SELECT * FROM `".self::$table."` WHERE `annee` =  '$annee', `idcategorie_maitre` = '$idcategorie_maitre', "
+                . "`idnageur` = '$id_nageur', `idepreuve` = '$id_epreuve' ") or die(mysql_error());
+        if(mysql_numrows($res) != 0){
+            throw new Exception('Cette competition existe deja');
+        }
         mysql_query("INSERT INTO `".self::$table."` (`annee`, `idcategorie_maitre`, `idnageur`, `idepreuve`) VALUES "
                         . "('$annee', '$idcategorie_maitre', '$id_nageur', '$id_epreuve')") or die(mysql_error());
         return true;
@@ -37,16 +43,16 @@ class competition {
 
     /**
      * Modification d'une competition suivant l'id
-     * @param type $idperformance
-     * @param type $annee
-     * @param type $idcategorie_maitre
-     * @param type $id_nageur
-     * @param type $id_epreuve
+     * @param int $id_competition
+     * @param int $annee
+     * @param int $idcategorie_maitre
+     * @param int $id_nageur
+     * @param int $id_epreuve
      * @return boolean
      */
-    public static function modifier($idcompetition, $annee, $idcategorie_maitre, $id_nageur, $id_epreuve) {
+    public static function modifier($id_competition, $annee, $idcategorie_maitre, $id_nageur, $id_epreuve) {
         mysql_query("UPDATE `".self::$table."` SET `annee` = '$annee', `idcategorie_maitre` = '$idcategorie_maitre', `idnageur` = '$id_nageur', `idepreuve` = '$id_epreuve'"
-                        . " WHERE `".self::$cle_primaire."` = '$idcompetition'") or die(mysql_error());
+                        . " WHERE `".self::$cle_primaire."` = '$id_competition'") or die(mysql_error());
         return true;
     }
 
@@ -93,10 +99,10 @@ class competition {
     /**
      * Recherche les competitions d'une categorie
      * @param int $id_categorie_maitre l'id de categorie_maitre
-     * @return boolean | array, false si aucune performance correspondante n'a ete trouvee, sinon retourne les competitions de la categorie_maitre
+     * @return boolean | array, false si aucune competition correspondante n'a ete trouvee, sinon retourne les competitions de la categorie_maitre
      * dans un tableau
      */
-    public static function rechercherParcategorie_maitre($idcategorie_maitre) {
+    public static function rechercherParcategorieMaitre($idcategorie_maitre) {
         $res = mysql_query("SELECT * FROM `".self::$table."` WHERE `$idcategorie_maitre` =  '$idcategorie_maitre'") or die(mysql_error());
         if (mysql_num_rows($res) != 0) {
             $competitions = array();

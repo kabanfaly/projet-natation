@@ -17,3 +17,4 @@ if(!defined('CONNEXION')){
         mysql_select_db('natation');
     }
 }
+

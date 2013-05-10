@@ -21,7 +21,6 @@ class categorie_maitre {
     private static $cle_primaire = 'idcategorie_maitre';
 
     function __construct() {
-        
     }
 
     /**
@@ -50,7 +49,7 @@ class categorie_maitre {
      * @return boolean true si modification OK
      */
     public static function modifier($id_categorie_maitre, $nouvelle_categorie) {
-        mysql_query("UPDATE `" . self::$table . "` SET `type` = '$nouvelle_categorie' WHERE `" . self::$cle_primaire . "` = '$id_categorie_maitre'") or die(mysql_error());
+        mysql_query("UPDATE `" . self::$table . "` SET `categorie` = '$nouvelle_categorie' WHERE `" . self::$cle_primaire . "` = '$id_categorie_maitre'") or die(mysql_error());
         return true;
     }
 
