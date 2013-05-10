@@ -6,15 +6,16 @@
         Purpose of the stylesheet follows.
 */
 body{
-
+    /*font-family: Times New Roman;*/
+    font-family:  arial,helvetica,sans-serif;
 }
 #all{
     width: 900px;
     min-height: 600px;
+    font-size: 0.8em;
     /*border: blue solid 1px;*/
 }
 #header{
-    font-family: cursive;
     width: 100%;
     height: 200px;   
     /*border: blue solid 1px;*/
@@ -23,16 +24,28 @@ body{
     height: 157px;
     background: url(../images/entete.png) no-repeat;
 }
-.menuH li{
+
+ul.menuH{
     float: right;
+}
+.menuH li{
+    display: inline-table;
     list-style: none;
     margin-right: 5px;
-    width: 110px;
-    height: 30px;
+    width: 115px;
+    padding-top: 7px;
+    padding-bottom: 7px;
     text-align: center;
     background-color: appworkspace;
     border: solid 1px black;
     text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+
+}
+.menuH a {
+    text-decoration: none;
+    color: black;
 }
 .menuH li:hover{
     background-color: greenyellow;
@@ -45,24 +58,67 @@ body{
     /*border: bisque solid 1px;*/
 }
 .menuV {
-    width: 20%;
+    width: 22%;
     min-height: 300px;
     float: left;
-    border: solid 1px grey;
+    border: solid 1px green;
+    margin-bottom: 5px;
 }
 .contenu{
-    width: 78%;
-    border: solid 1px grey;
+    margin-top: 5px;
+    width: 76%;
+    border: solid 1px green;
     min-height: 300px;
-    margin-left: 22%;
+    margin-left: 24%;
 }
 #pied_de_page{
+    clear: both;
     width: 100%;
     height: 50px;
     margin-top: 10px;
-    border: solid 1px grey;
+    border: solid 1px green;
 }
 #current{
     background-color: green;  
-    color: white;
+}
+#current2{
+    font-weight: bold;
+}
+#current2 a{
+    color: green;
+}
+a #current {
+    color: white;    
+}
+#connexion{
+    width: 100%;
+}
+.menuV a {
+    text-decoration: none;
+}
+ul.menu{
+    list-style-type: none !important;
+}
+
+ul.menu li a:link, ul.menu li a:visited {
+    background: url("../images/puce.gif") no-repeat scroll 5px 12px transparent;
+    color: #444444;
+}
+ul.menu li a:link, ul.menu li a:visited {
+    display: block;
+    padding: 7px 4px 7px 15px;
+    text-decoration: none;
+}
+ul.menu li a:hover{
+    color: green;
+    background: none;
+}
+ul.menu {
+    margin: 0;
+    padding: 0;
+}
+#header ul li a:link, #header ul li a:visited {
+    display: inline;
+    padding: 10px;
+    text-transform: uppercase;
 }

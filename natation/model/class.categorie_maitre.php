@@ -100,7 +100,7 @@ class categorie_maitre {
         //Recuperer toutes les categories
         $res = mysql_query("SELECT * FROM `" . self::$table . "`") or die(mysql_error());
         if (mysql_num_rows($res) != 0) {
-            $types = array();
+            $categories = array();
             //Recuperer toutes les lignes trouvees
             while (($ligne = mysql_fetch_array($res)) !== FALSE) {
                 $categories[] = $ligne;
