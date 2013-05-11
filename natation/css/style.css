@@ -47,6 +47,9 @@ ul.menuH{
     text-decoration: none;
     color: black;
 }
+* a{
+    text-decoration: none;
+}
 .menuH li:hover{
     background-color: greenyellow;
 }
@@ -121,4 +124,7 @@ ul.menu {
     display: inline;
     padding: 10px;
     text-transform: uppercase;
+}
+#libelle{
+ margin-right: 5px;    
 }

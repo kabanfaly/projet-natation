@@ -1,7 +1,7 @@
 <?php include './entete.php' ?>
 <div class="contenu">
     <center><h2>Gestion des nageurs</h2></center>
-    <span><button><a href="">Ajouter un nouveau nageur</a></button></span>
+    <span><a href="formulaire_nageur.php"><button>Ajouter un nouveau nageur</button></a></span>
     <div>
         <table>
             <tr>

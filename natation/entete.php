@@ -29,7 +29,7 @@ if (strpos($page, 'competitions') !== false) {
                 <ul class="menuH">   
                      <a href="index.php">
                         <li id="<?php
-                        if (strpos($page, 'index') !== false || strpos($page, 'gestion') !== false) {
+                        if (strpos($page, 'index') !== false || strpos($page, 'gestion') !== false || strpos($page, 'formulaire') !== false) {
                             echo 'current';
                         }
                         ?>">Accueil</li>
@@ -69,7 +69,7 @@ if (strpos($page, 'competitions') !== false) {
                     </div>
                     <ul class="menu">
                         <li  id="<?php
-                        if (strpos($page, 'gestion_nageurs') !== false) {
+                        if (strpos($page, 'gestion_nageurs') !== false || strpos($page, 'formulaire_nageur') !== false) {
                             echo 'current2';
                             }?>"><a href="gestion_nageurs.php">Gestion des nageurs</a></li>
                         <li id="<?php
