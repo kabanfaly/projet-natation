@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le : Dim 12 Mai 2013 à 21:12
+-- Généré le : Lun 13 Mai 2013 à 00:03
 -- Version du serveur: 5.5.31
 -- Version de PHP: 5.3.10-1ubuntu3.6
 
@@ -90,19 +90,8 @@ CREATE TABLE IF NOT EXISTS `nageur` (
   `sexe` varchar(45) NOT NULL,
   `groupe` varchar(45) NOT NULL,
   PRIMARY KEY (`idnageur`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
---
--- Contenu de la table `nageur`
---
-
-INSERT INTO `nageur` (`idnageur`, `nom`, `prenom`, `date_de_naissance`, `sexe`, `groupe`) VALUES
-(2, 'Test', 'test', '1234-12-20', 'M', 'Seniors'),
-(3, 'Test', 'test', '1234-12-20', 'F', 'Seniors'),
-(4, 'Tests', 'test', '1234-12-20', 'M', 'Seniors'),
-(5, 'Tes', 'test', '1234-12-20', 'M', 'Seniors'),
-(6, 'Test', 'test', '0000-00-00', 'M', 'Seniors'),
-(7, 'Test', 'test', '1235-12-20', 'M', 'Seniors');
 
 -- --------------------------------------------------------
 
@@ -143,19 +132,19 @@ CREATE TABLE IF NOT EXISTS `type_de_nage` (
 -- Contraintes pour la table `competition`
 --
 ALTER TABLE `competition`
-  ADD CONSTRAINT `competition_ibfk_1` FOREIGN KEY (`idcategorie_maitre`) REFERENCES `categorie_maitre` (`idcategorie_maitre`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  ADD CONSTRAINT `competition_ibfk_2` FOREIGN KEY (`idnageur`) REFERENCES `nageur` (`idnageur`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  ADD CONSTRAINT `competition_ibfk_3` FOREIGN KEY (`idepreuve`) REFERENCES `epreuve` (`idepreuve`) ON DELETE CASCADE ON UPDATE NO ACTION;
+  ADD CONSTRAINT `competition_ibfk_6` FOREIGN KEY (`idepreuve`) REFERENCES `epreuve` (`idepreuve`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `competition_ibfk_4` FOREIGN KEY (`idcategorie_maitre`) REFERENCES `categorie_maitre` (`idcategorie_maitre`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `competition_ibfk_5` FOREIGN KEY (`idnageur`) REFERENCES `nageur` (`idnageur`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `epreuve`
 --
 ALTER TABLE `epreuve`
-  ADD CONSTRAINT `epreuve_ibfk_1` FOREIGN KEY (`idtype_de_nage`) REFERENCES `type_de_nage` (`idtype_de_nage`) ON DELETE CASCADE ON UPDATE NO ACTION;
+  ADD CONSTRAINT `epreuve_ibfk_2` FOREIGN KEY (`idtype_de_nage`) REFERENCES `type_de_nage` (`idtype_de_nage`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `performance`
 --
 ALTER TABLE `performance`
-  ADD CONSTRAINT `performance_ibfk_1` FOREIGN KEY (`idnageur`) REFERENCES `nageur` (`idnageur`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  ADD CONSTRAINT `performance_ibfk_2` FOREIGN KEY (`idepreuve`) REFERENCES `epreuve` (`idepreuve`) ON DELETE CASCADE ON UPDATE NO ACTION;
+  ADD CONSTRAINT `performance_ibfk_4` FOREIGN KEY (`idepreuve`) REFERENCES `epreuve` (`idepreuve`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `performance_ibfk_3` FOREIGN KEY (`idnageur`) REFERENCES `nageur` (`idnageur`) ON DELETE NO ACTION ON UPDATE NO ACTION;

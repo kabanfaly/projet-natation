@@ -76,7 +76,7 @@ class nageur {
      * @param int $id_nageur l'id du nageur
      */
     public static function supprimer($id_nageur) {
-        mysql_query("DELELE FROM `" . self::$table . "` WHERE `" . self::$cle_primaire . "` = $id_nageur") or die(mysql_error());
+        mysql_query("DELETE FROM `" . self::$table . "` WHERE `" . self::$cle_primaire . "` = $id_nageur") or die(mysql_error());
         return true;
     }
 
