@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le : Mer 08 Mai 2013 à 18:42
+-- Généré le : Dim 12 Mai 2013 à 21:12
 -- Version du serveur: 5.5.31
 -- Version de PHP: 5.3.10-1ubuntu3.6
 
@@ -13,6 +13,20 @@ SET time_zone = "+00:00";
 --
 -- Base de données: `natation`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `administrateur`
+--
+
+DROP TABLE IF EXISTS `administrateur`;
+CREATE TABLE IF NOT EXISTS `administrateur` (
+  `idadmin` int(11) NOT NULL AUTO_INCREMENT,
+  `login` varchar(45) NOT NULL,
+  `mot_de_passe` varchar(45) NOT NULL,
+  PRIMARY KEY (`idadmin`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -76,7 +90,19 @@ CREATE TABLE IF NOT EXISTS `nageur` (
   `sexe` varchar(45) NOT NULL,
   `groupe` varchar(45) NOT NULL,
   PRIMARY KEY (`idnageur`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+
+--
+-- Contenu de la table `nageur`
+--
+
+INSERT INTO `nageur` (`idnageur`, `nom`, `prenom`, `date_de_naissance`, `sexe`, `groupe`) VALUES
+(2, 'Test', 'test', '1234-12-20', 'M', 'Seniors'),
+(3, 'Test', 'test', '1234-12-20', 'F', 'Seniors'),
+(4, 'Tests', 'test', '1234-12-20', 'M', 'Seniors'),
+(5, 'Tes', 'test', '1234-12-20', 'M', 'Seniors'),
+(6, 'Test', 'test', '0000-00-00', 'M', 'Seniors'),
+(7, 'Test', 'test', '1235-12-20', 'M', 'Seniors');
 
 -- --------------------------------------------------------
 
