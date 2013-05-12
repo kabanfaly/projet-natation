@@ -6,7 +6,11 @@
  *
  * @author kaba
  */
-include_once '../include/connexion.php';
+if (file_exists('../include/connexion.php')) {
+    include_once '../include/connexion.php';
+} else {
+    include_once 'include/connexion.php';
+}
 
 class nageur {
 
@@ -14,7 +18,7 @@ class nageur {
      * Nom de la table dans la base de donnees
      * @var string 
      */
-    private $table = 'nageur';
+    private static $table = 'nageur';
 
     /**
      * Nom de la colonne cle primaire de la table
@@ -43,7 +47,7 @@ class nageur {
 
         //Exception si le nageur existe 
         if (mysql_num_rows($res) != 0) {
-            throw new Exception("Ce type existe deja");
+            throw new Exception("Ce nageur existe d&eacute;ja");
         }
         //si le nageur n'existe pas on l'enregistre
         mysql_query("INSERT INTO `" . self::$table . "` (`nom`,`prenom`,`date_de_naissance`,`sexe`,`groupe`) VALUES "
@@ -82,12 +86,13 @@ class nageur {
      * @return boolean | array, false si aucun nageur correspondant n'a ete trouve, sinon retourne la ligne correspondant au nageur
      */
     public static function rechercherParId($id_nageur) {
-        $res = mysql_query("SELECT * FROM `".self::$table."` WHERE `".self::$cle_primaire."` =  '$id_nageur'") or die(mysql_error());
-        if (mysql_num_rows($res) != 0) {           
+        $res = mysql_query("SELECT * FROM `" . self::$table . "` WHERE `" . self::$cle_primaire . "` =  '$id_nageur'") or die(mysql_error());
+        if (mysql_num_rows($res) != 0) {
             return mysql_fetch_array($res);
         }
         return false;
     }
+
     /**
      * Recherche par nom
      * @param string $nom le nom a rechercher
@@ -106,6 +111,7 @@ class nageur {
         }
         return false;
     }
+
     /**
      * Recherche par prenom
      * @param string $prenom le prenom a rechercher
@@ -124,6 +130,7 @@ class nageur {
         }
         return false;
     }
+
     /**
      * Recherche par groupe
      * @param string $groupe le groupe a rechercher

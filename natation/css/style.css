@@ -49,6 +49,7 @@ ul.menuH{
 }
 * a{
     text-decoration: none;
+    cursor: pointer;
 }
 .menuH li:hover{
     background-color: greenyellow;
@@ -128,3 +129,24 @@ ul.menu {
 #libelle{
  margin-right: 5px;    
 }
+
+#success{
+    color: green;
+}
+#messageErreur{
+    color: red;
+}
+#afficheur table{
+    width: 90%;
+    border:solid 1px #cfcaca ; 
+}
+#afficheur th{
+    background-color: #E6E6E6;
+}
+#lignePaire{
+    background-color: #D8D8D8;
+}
+#ligneImpaire{
+    background-color: white;
+}
+

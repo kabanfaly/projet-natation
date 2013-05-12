@@ -14,7 +14,7 @@ class epreuve {
      * Nom de la table dans la base de donnees
      * @var string 
      */
-    private $table = 'epreuve';
+    private static $table = 'epreuve';
 
     /**
      * Nom de la colonne cle primaire de la table

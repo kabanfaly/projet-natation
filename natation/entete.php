@@ -1,5 +1,7 @@
 <?php
+session_start();
 $page = $_SERVER['SCRIPT_NAME'];
+$titre = '';
 //Si on est sur la page d'accueil
 if (strpos($page, 'index') !== false) {
     $titre = 'Club de natation';
@@ -29,7 +31,8 @@ if (strpos($page, 'competitions') !== false) {
                 <ul class="menuH">   
                      <a href="index.php">
                         <li id="<?php
-                        if (strpos($page, 'index') !== false || strpos($page, 'gestion') !== false || strpos($page, 'formulaire') !== false) {
+                        if (strpos($page, 'index') !== false || strpos($page, 'gestion') !== false ||
+                                strpos($page, 'formulaire') !== false || strpos($page, 'enregistrement_ok') !== false) {
                             echo 'current';
                         }
                         ?>">Accueil</li>
