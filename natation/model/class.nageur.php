@@ -47,7 +47,7 @@ class nageur {
 
         //Exception si le nageur existe 
         if (mysql_num_rows($res) != 0) {
-            throw new Exception("Ce nageur existe d&eacute;ja");
+            throw new Exception("Ce nageur existe déjà");
         }
         //si le nageur n'existe pas on l'enregistre
         mysql_query("INSERT INTO `" . self::$table . "` (`nom`,`prenom`,`date_de_naissance`,`sexe`,`groupe`) VALUES "
@@ -66,7 +66,7 @@ class nageur {
      * @return boolean true si la modification est OK
      */
     public static function modifier($id_nageur, $nom, $prenom, $date_naissance, $sexe, $groupe) {
-        mysql_query("UPDATE `" . self::$table . "` SET `nom` = '$nom', `$prenom` = '$prenom', `date_de_naissance` = '$date_naissance', "
+        mysql_query("UPDATE `" . self::$table . "` SET `nom` = '$nom', `prenom` = '$prenom', `date_de_naissance` = '$date_naissance', "
                         . " `sexe` = '$sexe', `groupe` = '$groupe' WHERE `" . self::$cle_primaire . "` = '$id_nageur'") or die(mysql_error());
         return true;
     }

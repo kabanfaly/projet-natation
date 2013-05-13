@@ -1,7 +1,12 @@
-<?php include './entete.php' ?>
+<?php
+include './entete.php';
+//desactivattion de la session permettant de retenir les informations saisies dans le formulaire
+unset($_SESSION['contenu_nageur']);
+?>
+
 <div class="contenu">
     <center><h2>Gestion des nageurs</h2></center>
-    <span><a href="formulaire_nageur.php"><button>Ajouter un nouveau nageur</button></a></span>
+    <span><a href="formulaire_nageur.php?action=ajout"><button>Ajouter un nouveau nageur</button></a></span>
     <center>
         <div id="success">
             <?php
@@ -50,7 +55,9 @@
                             <td align="center"><?= $nageur['groupe'] ?> </td>
                             <td align="center">
                                 <a href="controleur/controleur_nageur.php?idmodif=<?= $nageur['idnageur'] ?>"><img src="images/edit.png"/></a>
-                                <a href="controleur/controleur_nageur.php?idsuppression=<?= $nageur['idnageur'] ?>"><img src="images/delete.png"/></a>
+                                <span onclick="if (confirm('Voulez vous supprimer ce nageur')) {
+                                            document.location.href = 'controleur/controleur_nageur.php?idsuppression=<?= $nageur['idnageur'] ?>';
+                                        }"><img src="images/delete.png"/></span>
                             </td>
                         </tr>
                         <?php

@@ -1,12 +1,12 @@
 <?php
 
-// Session pour les  messages d'erreurs
-if (!isset($_SESSION['message'])) {
-    session_register('message');
-}
 //Session pour les informations saisies par l'utlilisateur
 if (!isset($_SESSION['contenu_nageur'])) {
     session_register('contenu_nageur');
+}
+//Session pour les informations saisies par l'utlilisateur
+if (!isset($_SESSION['idnageur'])) {
+    session_register('idnageur');
 }
 
 /*
@@ -49,19 +49,25 @@ if ($_POST) {
     }
     //enregistrement du nageur
     $date_naissance = $explode[2] . '-' . $explode[1] . '-' . $explode[0];
-    try {
-        //Enregistrement
-        nageur::enregistrer($nom, $prenom, $date_naissance, $sexe, $groupe);
 
-        //Suppression des session
-        unset($_SESSION['message']);
-        unset($_SESSION['contenu_nageur']);
+    if (isset($_SESSION['idnageur'])) {
+        if (nageur::modifier($_SESSION['idnageur'], $nom, $prenom, $date_naissance, $sexe, $groupe)) {
+            //Redirection vers la page de gestion des nageurs
+            header('Location: ../gestion_nageurs.php?message=La modification a été effectuée avec succès');
+        }
+    } else {
+        try {
+            //Enregistrement
+            nageur::enregistrer($nom, $prenom, $date_naissance, $sexe, $groupe);
 
-        //Redirection vers la page enregistrement_ok
-        header('Location: ../enregistrement_ok.php?retour=gestion_nageurs');
-    } catch (Exception $exc) {
-        $_SESSION['message'] = $exc->getMessage();
-        header('Location: ../formulaire_nageur.php');
+            //Suppression des session
+            unset($_SESSION['contenu_nageur']);
+
+            //Redirection vers la page de gestion des nageurs
+            header('Location: ../gestion_nageurs.php?message=L\'enregistrement a été effectuée avec succès');
+        } catch (Exception $exc) {
+            header('Location: ../formulaire_nageur.php?action=ajout&message=' . $exc->getMessage());
+        }
     }
 } elseif ($_GET) {
     if (isset($_GET['idsuppression'])) {
@@ -75,8 +81,12 @@ if ($_POST) {
         //reconstruire la date de naissance
         $explode = explode('-', $nageur['date_de_naissance']);
         $nageur['date_de_naissance'] = $explode[2] . '/' . $explode[1] . '/' . $explode[0];
+
         //retinir les informations sur le nageur
         $_SESSION['contenu_nageur'] = $nageur;
+
+        //Engistrement de l'id du nageur dans la session pour la modification du nageur
+        $_SESSION['idnageur'] = $_GET['idmodif'];
         header('Location: ../formulaire_nageur.php?action=modif');
     }
 }
