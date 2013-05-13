@@ -5,7 +5,12 @@
  *
  * @author kaba
  */
-include_once '../include/connexion.php';
+if (file_exists('../include/connexion.php')) {
+    include_once '../include/connexion.php';
+} else {
+    include_once 'include/connexion.php';
+}
+
 class competition {
 
     /**
@@ -61,7 +66,7 @@ class competition {
      * @param type $id_competition
      */
     public static function supprimer($id_competition) {
-        mysql_query("DELELE FROM `".self::$table."` WHERE `".self::$cle_primaire."` = $id_competition") or die(mysql_error());
+        mysql_query("DELETE FROM `".self::$table."` WHERE `".self::$cle_primaire."` = $id_competition") or die(mysql_error());
         return true;
     }
 

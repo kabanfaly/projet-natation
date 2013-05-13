@@ -5,7 +5,12 @@
  *  etc.)
  * @author kaba
  */
-include_once '../include/connexion.php';
+if (file_exists('../include/connexion.php')) {
+    include_once '../include/connexion.php';
+} else {
+    include_once 'include/connexion.php';
+}
+
 
 class type_nage {
 
@@ -60,7 +65,7 @@ class type_nage {
      * @param int $id_type_nage
      */
     public static function supprimer($id_type_nage) {
-        mysql_query("DELELE FROM `" . self::$table . "` WHERE `" . self::$cle_primaire . "` = $id_type_nage") or die(mysql_error());
+        mysql_query("DELETE FROM `" . self::$table . "` WHERE `" . self::$cle_primaire . "` = $id_type_nage") or die(mysql_error());
         return true;
     }
 

@@ -4,15 +4,14 @@
     if (isset($_GET['action'])) {
         if ($_GET['action'] === 'modif') {
             echo '<center><h2>Modifier le nageur</h2></center>';
-        } else {            
+        } else {
+            //supprimer l'id du nageur enregistre eventuellement
             unset($_SESSION['idnageur']);
             echo '<center><h2>Ajouter un nouveau nageur</h2></center>';
         }
     }
     ?>
-
     <center>
-
         <div id="formulaire">  
             <div id="messageErreur">
                 <?php

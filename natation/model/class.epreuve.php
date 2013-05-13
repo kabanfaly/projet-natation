@@ -6,7 +6,12 @@
  *
  * @author kaba
  */
-include_once '../include/connexion.php';
+if (file_exists('../include/connexion.php')) {
+    include_once '../include/connexion.php';
+} else {
+    include_once 'include/connexion.php';
+}
+
 
 class epreuve {
 
@@ -20,7 +25,7 @@ class epreuve {
      * Nom de la colonne cle primaire de la table
      * @var string 
      */
-    private static $cle_primaire = 'idpreuve';
+    private static $cle_primaire = 'idepreuve';
 
     function __construct() {
         
@@ -64,7 +69,7 @@ class epreuve {
      * @param int $id_epreuve
      */
     public static function supprimer($id_epreuve) {
-        mysql_query("DELELE FROM `" . self::$table . "` WHERE `" . self::$cle_primaire . "` = $id_epreuve") or die(mysql_error());
+        mysql_query("DELETE FROM `" . self::$table . "` WHERE `" . self::$cle_primaire . "` = $id_epreuve") or die(mysql_error());
         return true;
     }
 

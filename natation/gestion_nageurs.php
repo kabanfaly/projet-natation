@@ -3,7 +3,6 @@ include './entete.php';
 //desactivattion de la session permettant de retenir les informations saisies dans le formulaire
 unset($_SESSION['contenu_nageur']);
 ?>
-
 <div class="contenu">
     <center><h2>Gestion des nageurs</h2></center>
     <span><a href="formulaire_nageur.php?action=ajout"><button>Ajouter un nouveau nageur</button></a></span>
@@ -24,16 +23,17 @@ unset($_SESSION['contenu_nageur']);
                     <th>Sexe</th>
                     <th>Groupe</th>
                     <th>Op&eacute;rations</th>
-                    <?php
-                    //Inclusion de la classe de la classe nageur
-                    include 'model/class.nageur.php';
+                </tr>
+                <?php
+                //Inclusion de la classe nageur
+                include 'model/class.nageur.php';
 
-                    //Recuperation de tous les nageurs
-                    $nageurs = nageur::rechercherTout();
+                //Recuperation de tous les nageurs
+                $nageurs = nageur::rechercherTout();
 
-                    //si aucun nageur n'existe
-                    if (!$nageurs) {
-                        ?>
+                //si aucun nageur n'existe
+                if (!$nageurs) {
+                    ?>
 
                     <tr><td align="center" colspan="5">Il n'existe aucun nageur enregistr&eacute;</td></tr>
                     <?php
@@ -64,7 +64,7 @@ unset($_SESSION['contenu_nageur']);
                     }
                 }
                 ?>
-                </tr>
+
             </table>
         </div>
     </center>

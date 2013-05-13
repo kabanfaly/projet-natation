@@ -1,21 +1,62 @@
 <?php include './entete.php' ?>
 <div class="contenu">
-    <center><h2>Ajouter un nouvelle &eacute;preuve</h2></center>
+    <?php
+    if (isset($_GET['action'])) {
+        if ($_GET['action'] === 'modif') {
+            echo '<center><h2>Modifier le nageur</h2></center>';
+        } else {
+            //supprimer l'id d'epreuve enregistre eventuellement
+            unset($_SESSION['idepreuve']);
+            echo '<center><h2>Ajouter un nouveau nageur</h2></center>';
+        }
+    }
+    ?>
     <center>
-        <div id="formulaire">        
+        <div id="formulaire"> 
+            <div id="messageErreur">
+                <?php
+                if (isset($_GET['message'])) {
+                    echo $_GET['message'];
+                }
+                ?>
+            </div>
             <table>
-                <form method="post" action="">            
+                <form method="post" action="controleur/controleur_epreuve.php">  
+
                     <tr>
                         <td id="libelle">Type de nage:</td>
                         <td>
+                            <?php
+                            include 'model/class.type_nage.php';
+                            $types = type_nage::rechercherTout();
+                            ?>
+
                             <select name="idtype_de_nage">
-                                <option value=""></option>
+                                <?php
+                                //Inclusion de la classe type de nage pour la recuperation des types de nage
+
+                                if ($types) {
+                                    foreach ($types as $key => $type) {
+                                        if (isset($_SESSION['contenu_epreuve']) && $_SESSION['contenu_epreuve']['idtype_de_nage'] === $type['idtype_de_nage']) {
+                                            echo '<option value="' . $type['idtype_de_nage'] . '" selected="true">' . $type['type'] . '</option>';
+                                        } else {
+                                            echo '<option value="' . $type['idtype_de_nage'] . '">' . $type['type'] . '</option>';
+                                        }
+                                    }
+                                } else {
+                                    ?>
+                                    <option value=""></option>
+                                <?php } ?>
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <td>Distance:</td>
-                        <td><input type="text" name="distance" size="5"/></td>
+                        <td><input type="text" name="distance" size="5" value="<?php
+                            if (isset($_SESSION['contenu_epreuve'])) {
+                                echo $_SESSION['contenu_epreuve']['distance'];
+                            }
+                            ?>" required="true"/></td>
                     </tr>
                     <tr>
                         <td colspan="2" align="center">

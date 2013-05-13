@@ -5,7 +5,12 @@
  *
  * @author kaba
  */
-include_once '../include/connexion.php';
+if (file_exists('../include/connexion.php')) {
+    include_once '../include/connexion.php';
+} else {
+    include_once 'include/connexion.php';
+}
+
 class categorie_maitre {
 
     /**
@@ -58,7 +63,7 @@ class categorie_maitre {
      * @param int $id_categorie_maitre
      */
     public static function supprimer($id_categorie_maitre) {
-        mysql_query("DELELE FROM `" . self::$table . "` WHERE `" . self::$cle_primaire . "` = $id_categorie_maitre") or die(mysql_error());
+        mysql_query("DELETE FROM `" . self::$table . "` WHERE `" . self::$cle_primaire . "` = $id_categorie_maitre") or die(mysql_error());
         return true;
     }
 

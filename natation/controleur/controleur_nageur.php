@@ -4,15 +4,11 @@
 if (!isset($_SESSION['contenu_nageur'])) {
     session_register('contenu_nageur');
 }
-//Session pour les informations saisies par l'utlilisateur
+//Session pour enregistrer l'id du nageur
 if (!isset($_SESSION['idnageur'])) {
     session_register('idnageur');
 }
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 include '../model/class.nageur.php';
 
 if ($_POST) {
@@ -60,7 +56,7 @@ if ($_POST) {
             //Enregistrement
             nageur::enregistrer($nom, $prenom, $date_naissance, $sexe, $groupe);
 
-            //Suppression des session
+            //Vider la session contenant les elements saisie par l'utilisateur
             unset($_SESSION['contenu_nageur']);
 
             //Redirection vers la page de gestion des nageurs

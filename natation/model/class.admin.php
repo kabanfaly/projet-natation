@@ -5,6 +5,13 @@
  *
  * @author kaba
  */
+if (file_exists('../include/connexion.php')) {
+    include_once '../include/connexion.php';
+} else {
+    include_once 'include/connexion.php';
+}
+
+
 class administrateur {
     /**
      * Creer un nouvel administrateur s'il n'existe aucun administrateur ou bien modifie le mot de passe 
