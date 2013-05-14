@@ -8,7 +8,7 @@
                 <th>Nageur</th>
                 <th>Epreuve</th>
                 <th>Cat&eacute;gorie ma&icirc;tre</th>
-                <th>ann&eacute;</th>
+                <th>ann&eacute;e</th>
             </tr>
         </table>
     </div>

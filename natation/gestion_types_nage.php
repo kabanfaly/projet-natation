@@ -48,7 +48,7 @@ unset($_SESSION['contenu_type_nage']);
                             <td align="center"><?= $type_nage['type'] ?> </td>
                             <td align="center">
                                 <a href="controleur/controleur_type_nage.php?idmodif=<?= $type_nage['idtype_de_nage'] ?>"><img src="images/edit.png"/></a>
-                                <span onclick="if (confirm('Voulez vous supprimer ce type de nage')) {
+                                <span onclick="if (confirm('Voulez vous supprimer ce type de nage?')) {
                                             document.location.href = 'controleur/controleur_type_nage.php?idsuppression=<?= $type_nage['idtype_de_nage'] ?>';
                                         }"><img src="images/delete.png"/></span>
                             </td>

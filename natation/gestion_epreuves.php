@@ -54,7 +54,7 @@ unset($_SESSION['contenu_epreuve']);
                             <td align="center"><?= $epreuve['distance'] ?> </td>
                             <td align="center">
                                 <a href="controleur/controleur_epreuve.php?idmodif=<?= $epreuve['idepreuve'] ?>"><img src="images/edit.png"/></a>
-                                <span onclick="if (confirm('Voulez vous supprimer cette epreuve')) {
+                                <span onclick="if (confirm('Voulez vous supprimer cette epreuve?')) {
                                             document.location.href = 'controleur/controleur_epreuve.php?idsuppression=<?= $epreuve['idepreuve'] ?>';
                                         }"><img src="images/delete.png"/></span>
                             </td>

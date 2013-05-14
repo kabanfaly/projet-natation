@@ -55,7 +55,7 @@ unset($_SESSION['contenu_nageur']);
                             <td align="center"><?= $nageur['groupe'] ?> </td>
                             <td align="center">
                                 <a href="controleur/controleur_nageur.php?idmodif=<?= $nageur['idnageur'] ?>"><img src="images/edit.png"/></a>
-                                <span onclick="if (confirm('Voulez vous supprimer ce nageur')) {
+                                <span onclick="if (confirm('Voulez vous supprimer ce nageur?')) {
                                             document.location.href = 'controleur/controleur_nageur.php?idsuppression=<?= $nageur['idnageur'] ?>';
                                         }"><img src="images/delete.png"/></span>
                             </td>
