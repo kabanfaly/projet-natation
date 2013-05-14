@@ -36,8 +36,8 @@ class competition {
      */
     public static function enregistrer($annee, $idcategorie_maitre, $id_nageur, $id_epreuve) {
         // Rechercher la competition si elle existe
-        $res =  mysql_query("SELECT * FROM `".self::$table."` WHERE `annee` =  '$annee', `idcategorie_maitre` = '$idcategorie_maitre', "
-                . "`idnageur` = '$id_nageur', `idepreuve` = '$id_epreuve' ") or die(mysql_error());
+        $res =  mysql_query("SELECT * FROM `".self::$table."` WHERE `annee` =  '$annee' AND `idcategorie_maitre` = '$idcategorie_maitre' AND "
+                . "`idnageur` = '$id_nageur' AND `idepreuve` = '$id_epreuve' ") or die(mysql_error());
         if(mysql_numrows($res) != 0){
             throw new Exception('Cette competition existe deja');
         }

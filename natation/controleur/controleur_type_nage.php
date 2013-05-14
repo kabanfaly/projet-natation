@@ -30,9 +30,6 @@ if ($_POST) {
             //Enregistrement
             type_nage::enregistrer($type);
 
-            //Vider la session contenant les elements saisie par l'utilisateur
-            unset($_SESSION['contenu_type_nage']);
-
             //Redirection vers la page de gestion des nageurs
             header('Location: ../gestion_types_nage.php?message=L\'enregistrement a été effectuée avec succès');
         } catch (Exception $exc) {

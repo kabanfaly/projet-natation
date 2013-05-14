@@ -56,9 +56,6 @@ if ($_POST) {
             //Enregistrement
             nageur::enregistrer($nom, $prenom, $date_naissance, $sexe, $groupe);
 
-            //Vider la session contenant les elements saisie par l'utilisateur
-            unset($_SESSION['contenu_nageur']);
-
             //Redirection vers la page de gestion des nageurs
             header('Location: ../gestion_nageurs.php?message=L\'enregistrement a été effectuée avec succès');
         } catch (Exception $exc) {

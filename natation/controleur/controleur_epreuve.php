@@ -31,9 +31,6 @@ if ($_POST) {
             //Enregistrement
             epreuve::enregistrer( $id_type_de_nage, $distance);
 
-            //Vider la session contenant les elements saisie par l'utilisateur
-            unset($_SESSION['contenu_epreuve']);
-
             //Redirection vers la page de gestion des nageurs
             header('Location: ../gestion_epreuves.php?message=L\'enregistrement a été effectuée avec succès');
         } catch (Exception $exc) {

@@ -29,10 +29,7 @@ if ($_POST) {
         try {
             //Enregistrement
             categorie_maitre::enregistrer($categorie);
-
-            //Vider la session contenant les elements saisies par l'utilisateur
-            unset($_SESSION['contenu_categorie_maitre']);
-
+            
             //Redirection vers la page de gestion des categories maitres
             header('Location: ../gestion_categories_maitres.php?message=L\'enregistrement a été effectuée avec succès');
         } catch (Exception $exc) {

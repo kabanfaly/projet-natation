@@ -29,7 +29,7 @@ unset($_SESSION['contenu_categorie_maitre']);
                 //Recuperation de toutes les categorie
                 $categorie_maitres = categorie_maitre::rechercherTout();
 
-                //si aucun type de nage n'existe
+                //si aucune categorie n'existe
                 if (!$categorie_maitres) {
                     ?>
 

@@ -5,7 +5,7 @@
         if ($_GET['action'] === 'modif') {
             echo '<center><h2>Modifier le nageur</h2></center>';
         } else {
-            //supprimer l'id d'epreuve enregistre eventuellement
+            //supprimer l'id de l'epreuve enregistre eventuellement
             unset($_SESSION['idepreuve']);
             echo '<center><h2>Ajouter un nouveau nageur</h2></center>';
         }
@@ -32,9 +32,8 @@
                             ?>
 
                             <select name="idtype_de_nage">
+                                <option value="">Choisissez</option>
                                 <?php
-                                //Inclusion de la classe type de nage pour la recuperation des types de nage
-
                                 if ($types) {
                                     foreach ($types as $key => $type) {
                                         if (isset($_SESSION['contenu_epreuve']) && $_SESSION['contenu_epreuve']['idtype_de_nage'] === $type['idtype_de_nage']) {
@@ -43,10 +42,8 @@
                                             echo '<option value="' . $type['idtype_de_nage'] . '">' . $type['type'] . '</option>';
                                         }
                                     }
-                                } else {
-                                    ?>
-                                    <option value=""></option>
-                                <?php } ?>
+                                }
+                                ?>
                             </select>
                         </td>
                     </tr>
