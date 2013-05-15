@@ -29,7 +29,7 @@ if (strpos($page, 'competitions') !== false) {
             <div id="header">
                 <div class="logo"></div>
                 <ul class="menuH">   
-                     <a href="index.php">
+                    <a href="index.php">
                         <li id="<?php
                         if (strpos($page, 'index') !== false || strpos($page, 'gestion') !== false ||
                                 strpos($page, 'formulaire') !== false || strpos($page, 'enregistrement_ok') !== false) {
@@ -50,52 +50,84 @@ if (strpos($page, 'competitions') !== false) {
                             echo 'current';
                         }
                         ?>">Comp&eacute;titions</li>
-                    </a>                   
-                    <a href="deconnexion.php">
-                        <li>D&eacute;connexion</li>
-                    </a>                   
+                    </a>      
+                    <?php
+                    if (isset($_SESSION['admin']) && $_SESSION['admin']) {
+                        ?>
+                        <a href="admin.php">
+                            <li id="<?php
+                            if (strpos($page, '/admin') !== false) {
+                                echo 'current';
+                            }
+                            ?>">Mon compte</li>
+                        </a>
+                        <a href="controleur/deconnexion.php">
+                            <li>D&eacute;connexion</li>
+                        </a>     
+                    <?php } ?>
                 </ul>
             </div>
             <div id="principal"> 
                 <div class="menuV">
-                    <div id="connexion">
-                        <fieldset>
-                            <legend>Connexion</legend>
-                            <form method="post" action="">
-                                <input type="text" name="login" size="10"/>
-                                <input type="password" name="mot_de_passe" size="10"/>
-                                <center>
-                                    <input type="submit" value="Valider"/>
-                                </center>
-                            </form>
-                        </fieldset>
-                    </div>
-                    <ul class="menu">
-                        <li  id="<?php
-                        if (strpos($page, 'gestion_nageurs') !== false || strpos($page, 'formulaire_nageur') !== false) {
-                            echo 'current2';
-                            }?>"><a href="gestion_nageurs.php">Gestion des nageurs</a></li>
-                        <li id="<?php
-                        if (strpos($page, 'gestion_types_nage') !== false) {
-                            echo 'current2';
-                            }?>"><a href="gestion_types_nage.php">Gestion des types de nage</a></li>
-                        <li id="<?php
-                        if (strpos($page, 'gestion_epreuves') !== false) {
-                            echo 'current2';
-                            }?>"><a href="gestion_epreuves.php">Gestion des &eacute;preuves</a></li>
-                        <li id="<?php
-                        if (strpos($page, 'gestion_categories_maitres') !== false) {
-                            echo 'current2';
-                            }?>"><a href="gestion_categories_maitres.php">Gestion des cat&eacute;gories ma&icirc;tres</a></li>
-                        <li id="<?php
-                        if (strpos($page, 'gestion_competitions') !== false) {
-                            echo 'current2';
-                            }?>"><a href="gestion_competitions.php">Gestion des comp&eacute;titions</a></li>
-                        <li id="<?php
-                        if (strpos($page, 'gestion_performances') !== false) {
-                            echo 'current2';
-                            }?>"><a href="gestion_performances.php">Gestion des performances</a></li>
-                    </ul>
+                    <?php
+                    if (!isset($_SESSION['admin']) || !$_SESSION['admin']) {
+                        ?>
+                        <div id="connexion">
+                            <div id="messageErreur">
+                                <?php
+                                if (isset($_GET['message'])) {
+                                    echo $_GET['message'];
+                                }
+                                ?>
+                            </div>
+                            <fieldset>
+                                <legend>Connexion</legend>
+                                <form method="post" action="controleur/controleur_connexion.php">
+                                    <input type="text" name="login" required="true" size="10"/>
+                                    <input type="password" name="mot_de_passe" required="true" size="10"/>
+                                    <center>
+                                        <input type="submit" value="Valider"/>
+                                    </center>
+                                </form>
+                            </fieldset>
+                        </div>
+                        <?php
+                    }
+                    if (isset($_SESSION['admin']) && $_SESSION['admin']) {
+                        ?>
+                        <ul class="menu">
+                            <li  id="<?php
+                            if (strpos($page, 'gestion_nageurs') !== false || strpos($page, 'formulaire_nageur') !== false) {
+                                echo 'current2';
+                            }
+                            ?>"><a href="gestion_nageurs.php">Gestion des nageurs</a></li>
+                            <li id="<?php
+                            if (strpos($page, 'gestion_types_nage') !== false) {
+                                echo 'current2';
+                            }
+                            ?>"><a href="gestion_types_nage.php">Gestion des types de nage</a></li>
+                            <li id="<?php
+                            if (strpos($page, 'gestion_epreuves') !== false) {
+                                echo 'current2';
+                            }
+                            ?>"><a href="gestion_epreuves.php">Gestion des &eacute;preuves</a></li>
+                            <li id="<?php
+                            if (strpos($page, 'gestion_categories_maitres') !== false) {
+                                echo 'current2';
+                            }
+                            ?>"><a href="gestion_categories_maitres.php">Gestion des cat&eacute;gories ma&icirc;tres</a></li>
+                            <li id="<?php
+                            if (strpos($page, 'gestion_competitions') !== false) {
+                                echo 'current2';
+                            }
+                            ?>"><a href="gestion_competitions.php">Gestion des comp&eacute;titions</a></li>
+                            <li id="<?php
+                            if (strpos($page, 'gestion_performances') !== false) {
+                                echo 'current2';
+                            }
+                            ?>"><a href="gestion_performances.php">Gestion des performances</a></li>
+                        </ul>
+                    <?php } ?>
                 </div>
 
 
