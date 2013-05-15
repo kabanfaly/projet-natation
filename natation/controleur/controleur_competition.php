@@ -45,13 +45,13 @@ if ($_POST) {
             header('Location: ../gestion_competitions.php?message=La suppression a été effectuée avec succès');
         }
     } elseif (isset($_GET['idmodif'])) {
-        //recuperer l'competition par son id
+        //recuperer la competition par son id
         $competition = competition::rechercherParId($_GET['idmodif']);
 
         //retinir les informations sur la competition
         $_SESSION['contenu_competition'] = $competition;
 
-        //Engistrement de l'id de l'competition dans la session pour la modification
+        //Engistrement de l'id de la competition dans la session pour la modification
         $_SESSION['idcompetition'] = $_GET['idmodif'];
         header('Location: ../formulaire_competition.php?action=modif');
     }
