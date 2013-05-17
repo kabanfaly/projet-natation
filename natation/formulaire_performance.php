@@ -75,7 +75,7 @@
                                                                      if (isset($_SESSION['contenu_performance'])) {
                                                                          echo $_SESSION['contenu_performance']['temps'];
                                                                      }
-                                                                     ?>" required="true"/></td>
+                                                                     ?>" required="true"/>(HH:mm:ss)</td>
                     </tr>
                     </tr>
                         <td id="libelle">Points:</td><td><input type="text" name="points" size="5" value="<?php
