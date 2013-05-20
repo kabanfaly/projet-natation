@@ -73,10 +73,11 @@ class categorie_maitre {
      * @return boolean | array, false si aucune categorie correspondante n'a ete trouvée, sinon retourne la ligne correspondante à la categorie de maitre
      */
     public static function rechercherParId($id_categorie_maitre) {
-        $res = mysql_query("SELECT * FROM `" . self::$table . "` WHERE `".self::$cle_primaire."` =  '$id_categorie_maitre'") or die(mysql_error());
+        $res = mysql_query("SELECT * FROM `" . self::$table . "` WHERE `".self::$cle_primaire."` =  '$id_categorie_maitre'") or die(mysql_error());        
         if (mysql_num_rows($res) != 0) {
             return mysql_fetch_array($res);
         }
+        
         return false;
     }
     /**
