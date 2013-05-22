@@ -5,7 +5,7 @@ if (!isset($_SESSION['contenu_nageur'])) {
     session_register('contenu_nageur');
 }
 //Session pour enregistrer l'id du nageur
-if (!isset($_SESSION['idnageur'])) {
+if (!isset($_SESSION['idnageur'])) { 
     session_register('idnageur');
 }
 

@@ -13,10 +13,10 @@ include '../model/class.categorie_maitre.php';
 
 if ($_POST) {
 
-    //Recuparation des donnees du formulaire
+    //Recuperation des donnees du formulaire
     $categorie = mysql_escape_string($_POST['categorie']);
 
-    //Enregistrement des contenus tapes par l'utilisateur
+    //Enregistrement des contenus tapés par l'utilisateur
     $_SESSION['contenu_categorie_maitre'] = $_POST;
  
     //enregistrement de la categorie maitre
