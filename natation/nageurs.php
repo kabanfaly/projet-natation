@@ -28,24 +28,26 @@
                         <th>Points</th>
                     </tr>
                     <?php
-                    $style = "lignePaire";
-                    foreach ($performances as $key => $performance) {
-                        if ($key % 2 == 0) {
-                            $style = "lignePaire";
-                        } else {
-                            $style = "ligneImpaire";
+                    if ($performances) {
+                        $style = "lignePaire";
+                        foreach ($performances as $key => $performance) {
+                            if ($key % 2 == 0) {
+                                $style = "lignePaire";
+                            } else {
+                                $style = "ligneImpaire";
+                            }
+                            //recherche de l'epreuve par son id
+                            $epreuve = epreuve::rechercherParId($performance['idepreuve']);
+                            //recherche du type de nage a partir de l'epreuve
+                            $type_nage = type_nage::rechercherParId($epreuve['idtype_de_nage']);
+                            ?>
+                            <tr id="<?= $style ?>">
+                                <td align="center"><?= $type_nage['type'] . ' (' . $epreuve['distance'] . ')' ?> </td>
+                                <td align="center"><?= $performance['temps'] ?> </td>
+                                <td align="center"><?= $performance['points'] ?> </td>
+                            </tr>
+                            <?php
                         }
-                        //recherche de l'epreuve par son id
-                        $epreuve = epreuve::rechercherParId($performance['idepreuve']);
-                        //recherche du type de nage a partir de l'epreuve
-                        $type_nage = type_nage::rechercherParId($epreuve['idtype_de_nage']);
-                        ?>
-                        <tr id="<?= $style ?>">
-                            <td align="center"><?= $type_nage['type'] . ' (' . $epreuve['distance'] . ')' ?> </td>
-                            <td align="center"><?= $performance['temps'] ?> </td>
-                            <td align="center"><?= $performance['points'] ?> </td>
-                        </tr>
-                        <?php
                     }
                     ?>
                 </table>
@@ -63,25 +65,27 @@
                         <th>ann&eacute;e</th>
                     </tr>
                     <?php
-                    foreach ($competitions as $key => $competition) {                                    
-                        if ($key % 2 == 0) {
-                            $style = "lignePaire";
-                        } else {
-                            $style = "ligneImpaire";
+                    if ($competitions) {
+                        foreach ($competitions as $key => $competition) {
+                            if ($key % 2 == 0) {
+                                $style = "lignePaire";
+                            } else {
+                                $style = "ligneImpaire";
+                            }
+                            //recherche de l'epreuve par son id
+                            $epreuve = epreuve::rechercherParId($competition['idepreuve']);
+                            //recherche du type de nage a partir de l'epreuve
+                            $type_nage = type_nage::rechercherParId($epreuve['idtype_de_nage']);
+                            //recherche de la categorie maitre par son id                        
+                            $categorie_maitre = categorie_maitre::rechercherParId($competition['idcategorie_maitre']);
+                            ?>
+                            <tr id="<?= $style ?>">
+                                <td align="center"><?= $type_nage['type'] . ' (' . $epreuve['distance'] . ')' ?> </td>
+                                <td align="center"><?= $categorie_maitre['categorie'] ?> </td>
+                                <td align="center"><?= $competition['annee'] ?> </td>
+                            </tr>
+                            <?php
                         }
-                        //recherche de l'epreuve par son id
-                        $epreuve = epreuve::rechercherParId($competition['idepreuve']);                        
-                        //recherche du type de nage a partir de l'epreuve
-                        $type_nage = type_nage::rechercherParId($epreuve['idtype_de_nage']);                        
-                        //recherche de la categorie maitre par son id                        
-                        $categorie_maitre = categorie_maitre::rechercherParId($competition['idcategorie_maitre']);
-                        ?>
-                        <tr id="<?= $style ?>">
-                            <td align="center"><?= $type_nage['type'] . ' (' . $epreuve['distance'] . ')' ?> </td>
-                            <td align="center"><?= $categorie_maitre['categorie'] ?> </td>
-                            <td align="center"><?= $competition['annee'] ?> </td>
-                        </tr>
-                        <?php
                     }
                     ?>
                 </table>
