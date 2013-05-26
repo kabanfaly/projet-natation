@@ -85,7 +85,7 @@
                                     if ($nageurs) {
                                         foreach ($categorie_maitres as $key => $categorie_maitre) {
                                             if (isset($_SESSION['contenu_competition']) && $_SESSION['contenu_competition']['idcategorie_maitre'] === $categorie_maitre['idcategorie_maitre']) {
-                                                echo '<option value="' . $categorie_maitre['idcategorie_maitre'] . '" selected="true">' . $nageur['nom'] . ' ' . $nageur['prenom'] . '</option>';
+                                                echo '<option value="' . $categorie_maitre['idcategorie_maitre'] . '" selected="true">' . $categorie_maitre['categorie']. '</option>';
                                             } else {
                                                 echo '<option value="' . $categorie_maitre['idcategorie_maitre'] . '">' . $categorie_maitre['categorie'] . '</option>';
                                             }
