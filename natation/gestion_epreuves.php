@@ -5,7 +5,7 @@ unset($_SESSION['contenu_epreuve']);
 ?>
 
 <div class="contenu">
-    <center><h2>Gestion des &eacute;preuve</h2></center>
+    <center><h2>Gestion des &eacute;preuves</h2></center>
     <span><a href="formulaire_epreuve.php?action=ajout"><button>Ajouter une nouvelle &eacute;preuve</button></a></span>
     <center>
         <div id="success">

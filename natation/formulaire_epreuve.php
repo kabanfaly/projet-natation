@@ -3,11 +3,11 @@
     <?php
     if (isset($_GET['action'])) {
         if ($_GET['action'] === 'modif') {
-            echo '<center><h2>Modifier le nageur</h2></center>';
+            echo '<center><h2>Modifier l\'&eacute;preuve</h2></center>';
         } else {
             //supprimer l'id de l'epreuve enregistre eventuellement
             unset($_SESSION['idepreuve']);
-            echo '<center><h2>Ajouter un nouveau nageur</h2></center>';
+            echo '<center><h2>Modifier une nouvelle &eacute;preuve</h2></center>';
         }
     }
     ?>
