@@ -18,50 +18,55 @@
                 if (isset($_GET['message'])) {
                     echo $_GET['message'];
                 }
-                ?>
-            </div>
-            <table>
-                <form method="post" action="controleur/controleur_epreuve.php">  
+                //si l'admin est connecte
+                if (isset($_SESSION['admin']) && $_SESSION['admin']) {
+                    ?>
+                </div>
+                <table>
+                    <form method="post" action="controleur/controleur_epreuve.php">  
 
-                    <tr>
-                        <td id="libelle">Type de nage:</td>
-                        <td>
-                            <?php
-                            include 'model/class.type_nage.php';
-                            $types = type_nage::rechercherTout();
-                            ?>
-
-                            <select name="idtype_de_nage">
-                                <option value="">Choisissez</option>
+                        <tr>
+                            <td id="libelle">Type de nage:</td>
+                            <td>
                                 <?php
-                                if ($types) {
-                                    foreach ($types as $key => $type) {
-                                        if (isset($_SESSION['contenu_epreuve']) && $_SESSION['contenu_epreuve']['idtype_de_nage'] === $type['idtype_de_nage']) {
-                                            echo '<option value="' . $type['idtype_de_nage'] . '" selected="true">' . $type['type'] . '</option>';
-                                        } else {
-                                            echo '<option value="' . $type['idtype_de_nage'] . '">' . $type['type'] . '</option>';
+                                include 'model/class.type_nage.php';
+                                $types = type_nage::rechercherTout();
+                                ?>
+
+                                <select name="idtype_de_nage">
+                                    <option value="">Choisissez</option>
+                                    <?php
+                                    if ($types) {
+                                        foreach ($types as $key => $type) {
+                                            if (isset($_SESSION['contenu_epreuve']) && $_SESSION['contenu_epreuve']['idtype_de_nage'] === $type['idtype_de_nage']) {
+                                                echo '<option value="' . $type['idtype_de_nage'] . '" selected="true">' . $type['type'] . '</option>';
+                                            } else {
+                                                echo '<option value="' . $type['idtype_de_nage'] . '">' . $type['type'] . '</option>';
+                                            }
                                         }
                                     }
+                                    ?>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Distance:</td>
+                            <td><input type="text" name="distance" size="5" value="<?php
+                                if (isset($_SESSION['contenu_epreuve'])) {
+                                    echo $_SESSION['contenu_epreuve']['distance'];
                                 }
-                                ?>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Distance:</td>
-                        <td><input type="text" name="distance" size="5" value="<?php
-                            if (isset($_SESSION['contenu_epreuve'])) {
-                                echo $_SESSION['contenu_epreuve']['distance'];
-                            }
-                            ?>" required="true"/></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" align="center">
-                            <input type="submit" value="Valider"/>
-                        </td>
-                    </tr>
-                </form>
-            </table>
+                                ?>" required="true"/></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" align="center">
+                                <input type="submit" value="Valider"/>
+                            </td>
+                        </tr>
+                    </form>
+                </table>
+                <?php
+            }
+            ?>
         </div>
     </center>
 </div>

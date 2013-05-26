@@ -19,26 +19,31 @@
                 if (isset($_GET['message'])) {
                     echo $_GET['message'];
                 }
-                ?>
-            </div>
-            <div id="formulaire">        
-                <table>
-                    <form method="post" action="controleur/controleur_categorie_maitre.php">            
-                        <tr>
-                            <td id="libelle">Cat&eacute;gorie:</td><td><input type="text" name="categorie" value="<?php
-                                                                  if (isset($_SESSION['contenu_categorie_maitre'])) {
-                                                                      echo $_SESSION['contenu_categorie_maitre']['categorie'];
-                                                                  }
-                                                                  ?>" required="true"/></td>
-                        </tr>                                  
-                        <tr>
-                            <td colspan="2" align="center">
-                                <input type="submit" value="Valider"/>
-                            </td>
-                        </tr>
-                    </form>
-                </table>
-            </div>
+                //si l'admin est connecte
+                if (isset($_SESSION['admin']) && $_SESSION['admin']) {
+                    ?>
+                </div>
+                <div id="formulaire">        
+                    <table>
+                        <form method="post" action="controleur/controleur_categorie_maitre.php">            
+                            <tr>
+                                <td id="libelle">Cat&eacute;gorie:</td><td><input type="text" name="categorie" value="<?php
+                                                                                  if (isset($_SESSION['contenu_categorie_maitre'])) {
+                                                                                      echo $_SESSION['contenu_categorie_maitre']['categorie'];
+                                                                                  }
+                                                                                  ?>" required="true"/></td>
+                            </tr>                                  
+                            <tr>
+                                <td colspan="2" align="center">
+                                    <input type="submit" value="Valider"/>
+                                </td>
+                            </tr>
+                        </form>
+                    </table>
+                </div>
+                <?php
+            }
+            ?>
     </center>
 </div>
 <?php include './pied_de_page.php' ?>

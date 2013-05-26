@@ -13,52 +13,57 @@ unset($_SESSION['contenu_type_nage']);
             if (isset($_GET['message'])) {
                 echo $_GET['message'];
             }
-            ?>
-        </div>
-        <br>
-        <div id="afficheur">
-            <table>
-                <tr>
-                    <th>Type</th>               
-                    <th>Op&eacute;rations</th>               
-                </tr>
-                <?php
-                //Inclusion de la classe type de nage
-                include 'model/class.type_nage.php';
-
-                //Recuperation de tous les types de nage
-                $type_nages = type_nage::rechercherTout();
-
-                //si aucun type de nage n'existe
-                if (!$type_nages) {
-                    ?>
-
-                    <tr><td align="center" colspan="5">Il n'existe aucun type de nage enregistr&eacute;</td></tr>
-                    <?php
-                } else {//sinon afficher tous les types de nage dans un tableau
-                    $style = "lignePaire";
-                    foreach ($type_nages as $key => $type_nage) {
-                        if ($key % 2 == 0) {
-                            $style = "lignePaire";
-                        } else {
-                            $style = "ligneImpaire";
-                        }
-                        ?>
-                        <tr id="<?= $style ?>">
-                            <td align="center"><?= $type_nage['type'] ?> </td>
-                            <td align="center">
-                                <a href="controleur/controleur_type_nage.php?idmodif=<?= $type_nage['idtype_de_nage'] ?>"><img src="images/edit.png"/></a>
-                                <span onclick="if (confirm('Voulez vous supprimer ce type de nage?')) {
-                                            document.location.href = 'controleur/controleur_type_nage.php?idsuppression=<?= $type_nage['idtype_de_nage'] ?>';
-                                        }"><img src="images/delete.png"/></span>
-                            </td>
-                        </tr>
-                        <?php
-                    }
-                }
+            //si l'admin est connecte
+            if (isset($_SESSION['admin']) && $_SESSION['admin']) {
                 ?>
-            </table>
-        </div>
+            </div>
+            <br>
+            <div id="afficheur">
+                <table>
+                    <tr>
+                        <th>Type</th>               
+                        <th>Op&eacute;rations</th>               
+                    </tr>
+                    <?php
+                    //Inclusion de la classe type de nage
+                    include 'model/class.type_nage.php';
+
+                    //Recuperation de tous les types de nage
+                    $type_nages = type_nage::rechercherTout();
+
+                    //si aucun type de nage n'existe
+                    if (!$type_nages) {
+                        ?>
+
+                        <tr><td align="center" colspan="5">Il n'existe aucun type de nage enregistr&eacute;</td></tr>
+                        <?php
+                    } else {//sinon afficher tous les types de nage dans un tableau
+                        $style = "lignePaire";
+                        foreach ($type_nages as $key => $type_nage) {
+                            if ($key % 2 == 0) {
+                                $style = "lignePaire";
+                            } else {
+                                $style = "ligneImpaire";
+                            }
+                            ?>
+                            <tr id="<?= $style ?>">
+                                <td align="center"><?= $type_nage['type'] ?> </td>
+                                <td align="center">
+                                    <a href="controleur/controleur_type_nage.php?idmodif=<?= $type_nage['idtype_de_nage'] ?>"><img src="images/edit.png"/></a>
+                                    <span onclick="if (confirm('Voulez vous supprimer ce type de nage?')) {
+                                                        document.location.href = 'controleur/controleur_type_nage.php?idsuppression=<?= $type_nage['idtype_de_nage'] ?>';
+                                                    }"><img src="images/delete.png"/></span>
+                                </td>
+                            </tr>
+                            <?php
+                        }
+                    }
+                    ?>
+                </table>
+            </div>
+            <?php
+        }
+        ?>
     </center>
 </div>
 <?php include './pied_de_page.php' ?>
