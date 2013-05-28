@@ -1,0 +1,11 @@
+Notice explicative pour installer le site
+
+1- Creer une base de données mysql nommée: natation
+2- Importer le contenu du fichier natation.sql dans la base de données créée
+3- Modifier le contenu du fichier connexion.php se trouvant dans le dossier include:
+    - sur la ligne contenant:  define('HOTE', 'localhost');
+            Modifier le 'localhost' pour mettre le nom du serveur (hote)
+    - sur la ligne contenant: define('LOGIN', 'root');
+            Modifier le 'root' pour mettre le login de l'utilisateur
+    - sur la ligne contenant: define('MDP', 'kaba');
+            Modifier le 'kaba' pour mettre le mot de passe de l'utilisateur

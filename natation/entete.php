@@ -112,10 +112,10 @@ if (strpos($page, 'competitions') !== false) {
                             }
                             ?>"><a href="gestion_epreuves.php">Gestion des &eacute;preuves</a></li>
                             <li id="<?php
-                            if (strpos($page, 'gestion_categories_maitres') !== false) {
+                            if (strpos($page, 'gestion_categories') !== false) {
                                 echo 'current2';
                             }
-                            ?>"><a href="gestion_categories_maitres.php">Gestion des cat&eacute;gories ma&icirc;tres</a></li>
+                            ?>"><a href="gestion_categories.php">Gestion des cat&eacute;gories</a></li>
                             <li id="<?php
                             if (strpos($page, 'gestion_competitions') !== false) {
                                 echo 'current2';

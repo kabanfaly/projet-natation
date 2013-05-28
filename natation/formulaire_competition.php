@@ -28,13 +28,11 @@
                     include 'model/class.nageur.php';
                     include 'model/class.epreuve.php';
                     include 'model/class.type_nage.php';
-                    include 'model/class.categorie_maitre.php';
+                    include 'model/class.categorie.php';
                     //rechercher tous les nageurs
                     $nageurs = nageur::rechercherTout();
                     //rechercher toutes les epreuves
-                    $epreuves = epreuve::rechercherTout();
-                    //rechercher toutes les categories maitres
-                    $categorie_maitres = categorie_maitre::rechercherTout();
+                    $epreuves = epreuve::rechercherTout();                    
                     ?>
                     <form method="post" action="controleur/controleur_competition.php">            
                         <tr>
@@ -43,12 +41,13 @@
                                 <select name="idnageur">
                                     <option value="">Choisissez</option>
                                     <?php
-                                    if ($nageurs) {
+                                    if ($nageurs) {                                        
                                         foreach ($nageurs as $key => $nageur) {
+                                            $categorie = categorie::rechercherParId($nageur['idcategorie']);
                                             if (isset($_SESSION['contenu_competition']) && $_SESSION['contenu_competition']['idnageur'] === $nageur['idnageur']) {
-                                                echo '<option value="' . $nageur['idnageur'] . '" selected="true">' . $nageur['nom'] . ' ' . $nageur['prenom'] . '</option>';
+                                                echo '<option value="' . $nageur['idnageur'] . '" selected="true">' . $nageur['nom'] . ' ' . $nageur['prenom'] . ' ('.$categorie['categorie'].')</option>';
                                             } else {
-                                                echo '<option value="' . $nageur['idnageur'] . '">' . $nageur['nom'] . ' ' . $nageur['prenom'] . '</option>';
+                                                echo '<option value="' . $nageur['idnageur'] . '">' . $nageur['nom'] . ' ' . $nageur['prenom'] . ' ('.$categorie['categorie'].')</option>';
                                             }
                                         }
                                     }
@@ -75,26 +74,7 @@
                                     ?>
                                 </select>
                             </td>
-                        </tr>
-                        <tr>
-                            <td id="libelle">Cat&eacute;gorie ma&icirc;tre:</td>
-                            <td>
-                                <select name="idcategorie_maitre">
-                                    <option value="">Choisissez</option>
-                                    <?php
-                                    if ($nageurs) {
-                                        foreach ($categorie_maitres as $key => $categorie_maitre) {
-                                            if (isset($_SESSION['contenu_competition']) && $_SESSION['contenu_competition']['idcategorie_maitre'] === $categorie_maitre['idcategorie_maitre']) {
-                                                echo '<option value="' . $categorie_maitre['idcategorie_maitre'] . '" selected="true">' . $categorie_maitre['categorie']. '</option>';
-                                            } else {
-                                                echo '<option value="' . $categorie_maitre['idcategorie_maitre'] . '">' . $categorie_maitre['categorie'] . '</option>';
-                                            }
-                                        }
-                                    }
-                                    ?>
-                                </select>
-                            </td>
-                        </tr>
+                        </tr>                       
                         <tr>
                             <td id="libelle">Ann&eacute;e</td><td><input type="text" name="annee" size="5" value="<?php
                                                                          if (isset($_SESSION['contenu_competition'])) {

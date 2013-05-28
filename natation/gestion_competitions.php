@@ -22,7 +22,6 @@ unset($_SESSION['contenu_competition']);
                     <tr>
                         <th>Nageur</th>
                         <th>Epreuve</th>
-                        <th>Cat&eacute;gorie ma&icirc;tre</th>
                         <th>ann&eacute;e</th>
                         <th>Op&eacute;rations</th>
                     </tr>
@@ -44,7 +43,7 @@ unset($_SESSION['contenu_competition']);
                         include 'model/class.nageur.php';
                         include 'model/class.epreuve.php';
                         include 'model/class.type_nage.php';
-                        include 'model/class.categorie_maitre.php';
+                        include 'model/class.categorie.php';
 
                         $style = "lignePaire";
                         foreach ($competitions as $key => $competition) {
@@ -60,12 +59,10 @@ unset($_SESSION['contenu_competition']);
                             //recherche du type de nage a partir de l'epreuve
                             $type_nage = type_nage::rechercherParId($epreuve['idtype_de_nage']);
                             //recherche de la categorie maitre par son id
-                            $categorie_maitre = categorie_maitre::rechercherParId($competition['idcategorie_maitre']);
                             ?>
                             <tr id="<?= $style ?>">
                                 <td align="center"><?= $nageur['nom'] . ' ' . $nageur['prenom'] ?> </td>
                                 <td align="center"><?= $type_nage['type'] . ' (' . $epreuve['distance'] . ')' ?> </td>
-                                <td align="center"><?= $categorie_maitre['categorie'] ?> </td>
                                 <td align="center"><?= $competition['annee'] ?> </td>
                                 <td align="center">
                                     <a href="controleur/controleur_competition.php?idmodif=<?= $competition['idcompetition'] ?>"><img src="images/edit.png"/></a>

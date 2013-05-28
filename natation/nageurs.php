@@ -14,7 +14,7 @@
         include 'model/class.epreuve.php';
         include 'model/class.type_nage.php';
         include 'model/class.competition.php';
-        include 'model/class.categorie_maitre.php';
+        include 'model/class.categorie.php';
         //Recherche des performances du nageur
         $performances = performance::rechercherParNageur($id_nageur);
         ?>
@@ -77,11 +77,11 @@
                             //recherche du type de nage a partir de l'epreuve
                             $type_nage = type_nage::rechercherParId($epreuve['idtype_de_nage']);
                             //recherche de la categorie maitre par son id                        
-                            $categorie_maitre = categorie_maitre::rechercherParId($competition['idcategorie_maitre']);
+                            $categorie = categorie::rechercherParId($competition['idcategorie']);
                             ?>
                             <tr id="<?= $style ?>">
                                 <td align="center"><?= $type_nage['type'] . ' (' . $epreuve['distance'] . ')' ?> </td>
-                                <td align="center"><?= $categorie_maitre['categorie'] ?> </td>
+                                <td align="center"><?= $categorie['categorie'] ?> </td>
                                 <td align="center"><?= $competition['annee'] ?> </td>
                             </tr>
                             <?php

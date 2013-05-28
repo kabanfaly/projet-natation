@@ -3,11 +3,11 @@
     <?php
     if (isset($_GET['action'])) {
         if ($_GET['action'] === 'modif') {
-            echo '<center><h2>Modifier la cat&eacute;gorie ma&icirc;tre</h2></center>';
+            echo '<center><h2>Modifier la cat&eacute;gorie</h2></center>';
         } else {
-            //supprimer l'id de la categorie maitre enregistre eventuellement
-            unset($_SESSION['idcategorie_maitre']);
-            echo '<center><h2>Ajouter une cat&eacute;gorie ma&icirc;tre</h2></center>';
+            //supprimer l'id de la categorie enregistre eventuellement
+            unset($_SESSION['idcategorie']);
+            echo '<center><h2>Ajouter une cat&eacute;gorie</h2></center>';
         }
     }
     ?>
@@ -25,11 +25,18 @@
                 </div>
                 <div id="formulaire">        
                     <table>
-                        <form method="post" action="controleur/controleur_categorie_maitre.php">            
+                        <form method="post" action="controleur/controleur_categorie.php">            
                             <tr>
                                 <td id="libelle">Cat&eacute;gorie:</td><td><input type="text" name="categorie" value="<?php
-                                                                                  if (isset($_SESSION['contenu_categorie_maitre'])) {
-                                                                                      echo $_SESSION['contenu_categorie_maitre']['categorie'];
+                                                                                  if (isset($_SESSION['contenu_categorie'])) {
+                                                                                      echo $_SESSION['contenu_categorie']['categorie'];
+                                                                                  }
+                                                                                  ?>" required="true"/></td>
+                            </tr>                                  
+                            <tr>
+                                <td id="libelle">Description:</td><td><input type="text" name="description" value="<?php
+                                                                                  if (isset($_SESSION['contenu_categorie'])) {
+                                                                                      echo $_SESSION['contenu_categorie']['description'];
                                                                                   }
                                                                                   ?>" required="true"/></td>
                             </tr>                                  

@@ -16,14 +16,13 @@ if ($_POST) {
     //Recuparation des donnees du formulaire
     $idnageur = mysql_escape_string($_POST['idnageur']);
     $idepreuve = mysql_escape_string($_POST['idepreuve']);
-    $idcategorie_maitre = mysql_escape_string($_POST['idcategorie_maitre']);
     $annee = mysql_escape_string($_POST['annee']);
 
     //Enregistrement des contenus tapes par l'utilisateur
     $_SESSION['contenu_competition'] = $_POST;
 
     if (isset($_SESSION['idcompetition'])) {
-        if (competition::modifier($_SESSION['idcompetition'], $annee, $idcategorie_maitre, $idnageur, $idepreuve)) {
+        if (competition::modifier($_SESSION['idcompetition'], $annee, $idnageur, $idepreuve)) {
             //Redirection vers la page de gestion des competitions
             unset($_SESSION['contenu_competition']);
             header('Location: ../gestion_competitions.php?message=La modification a été effectuée avec succès');
@@ -31,7 +30,7 @@ if ($_POST) {
     } else {
         try {
             //Enregistrement
-            competition::enregistrer($annee, $idcategorie_maitre, $idnageur, $idepreuve);
+            competition::enregistrer($annee, $idnageur, $idepreuve);
 
             //Redirection vers la page de gestion des competition
             header('Location: ../gestion_competitions.php?message=L\'enregistrement a été effectuée avec succès');

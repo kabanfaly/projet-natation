@@ -46,6 +46,30 @@
                                 ?>" required="true"/>&nbsp;JJ/MM/AAAA</td>
                         </tr>
                         <tr>
+                            <td id="libelle">Cat&eacute;gorie:</td>
+                            <td>
+                                 <?php
+                                include 'model/class.categorie.php';
+                                $categories = categorie::rechercherTout();
+                                ?>
+
+                                <select name="idcategorie">
+                                    <option value="">Choisissez</option>
+                                    <?php
+                                    if ($categories) {
+                                        foreach ($categories as $key => $categorie) {
+                                            if (isset($_SESSION['contenu_nageur']) && $_SESSION['contenu_nageur']['idcategorie'] === $categorie['idcategorie']) {
+                                                echo '<option value="' . $categorie['idcategorie'] . '" selected="true">' . $categorie['categorie'] . '</option>';
+                                            } else {
+                                                echo '<option value="' . $categorie['idcategorie'] . '">' . $categorie['categorie'] . '</option>';
+                                            }
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
                             <td id="libelle">Sexe:</td>
                             <td>
                                 <select name="sexe">
