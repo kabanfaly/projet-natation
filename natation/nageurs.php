@@ -124,7 +124,7 @@
                             $type_nage = type_nage::rechercherParId($epreuve['idtype_de_nage']);
                             ?>
                             <tr id="<?= $style ?>">
-                                <td align="center"><?= html_entity_decode($type_nage['type']) . ' (' . $epreuve['distance'] . ')' ?> </td>
+                                <td align="center"><?= html_entity_decode($type_nage['type']) . ' (' . $epreuve['distance'] . ' m)' ?> </td>
                                 <td align="center"><?= $performance['temps'] ?> </td>
                                 <td align="center"><?= $performance['annee'] ?> </td>
                                 <td align="center"><?= $performance['points'] ?> </td>

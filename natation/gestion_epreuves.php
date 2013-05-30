@@ -53,7 +53,7 @@ unset($_SESSION['contenu_epreuve']);
                             ?>
                             <tr id="<?= $style ?>">
                                 <td align="center"><?= $type_nage['type'] ?> </td>
-                                <td align="center"><?= $epreuve['distance'] ?> </td>
+                                <td align="center"><?= $epreuve['distance'] ?> m</td>
                                 <td align="center">
                                     <a href="controleur/controleur_epreuve.php?idmodif=<?= $epreuve['idepreuve'] ?>"><img src="images/edit.png"/></a>
                                     <span onclick="if (confirm('Voulez vous supprimer cette epreuve?')) {
