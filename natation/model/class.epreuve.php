@@ -91,7 +91,7 @@ class epreuve {
      * @return boolean | array,  false si l'epreuve n'a pas ete trouvee ou un tableau correspondant
      * a la ligne contenant le type
      */
-    public static function rechercherParType($id_type_de_nage) {
+    public static function rechercherParType($id_type_de_nage) {        
         $res = mysql_query("SELECT * FROM `" . self::$table . "` WHERE `idtype_de_nage` =  '$id_type_de_nage'") or die(mysql_error());
         if (mysql_num_rows($res) != 0) {
             $epreuves = array();

@@ -1,11 +1,17 @@
-Notice explicative pour installer le site
+Notice explicative pour herberger le site
 
-1- Creer une base de données mysql nommée: natation
-2- Importer le contenu du fichier natation.sql dans la base de données créée
-3- Modifier le contenu du fichier connexion.php se trouvant dans le dossier include:
+1- placer le tout le contenu du dossier natation à la racine de votre ressource web c'est à dire dans le répertoire www de votre site
+2- Modifier le contenu du fichier connexion.php se trouvant dans le dossier include:
     - sur la ligne contenant:  define('HOTE', 'localhost');
             Modifier le 'localhost' pour mettre le nom du serveur (hote)
     - sur la ligne contenant: define('LOGIN', 'root');
             Modifier le 'root' pour mettre le login de l'utilisateur
     - sur la ligne contenant: define('MDP', 'kaba');
             Modifier le 'kaba' pour mettre le mot de passe de l'utilisateur
+3- Creer une base de données mysql nommée: natation
+4- Importer le contenu du fichier natation.sql dans la base de données créée
+5- Ouvrir un navigateur web pour tapez l'adresse du site
+6- Se connecter en temps que admin avec les identifiants suivants:
+    login = admin
+    mot de passe = admin
+7- Modifier éventuellement le login et le mot de passe de l'administrateur via la page (mon compte)

@@ -152,6 +152,25 @@ class performance {
         }
         return false;
     }
+    /**
+     * Recherche les performances d'un nageur pour une epreuve donnee et pour une annee donnee
+     * @param int $idnageur l'id du nageur
+     * @param int $idepreuve l'id de l'epreuve
+     * @return boolean | array, false si aucune performance correspondante n'a ete trouvee suivant l'epreuve, sinon retourne les performances du nageur 
+     * dans un tableau
+     */
+    public static function rechercherParNageurEpreveuveAnnee($idnageur, $idepreuve, $annee){
+        $res = mysql_query("SELECT * FROM `".self::$table."` WHERE `idnageur` =  '$idnageur' AND `idepreuve` =  '$idepreuve' AND `annee` = '$annee'") or die(mysql_error());
+        if (mysql_num_rows($res) != 0) {
+            $performances = array();
+            //Recuperer toutes les lignes trouves
+            while (($ligne = mysql_fetch_array($res)) !== FALSE) {
+                $performances[] = $ligne;
+            }
+            return $performances;
+        }
+        return false;
+    }
     
     /**
      * Recherche toutes les performances

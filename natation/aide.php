@@ -55,6 +55,13 @@
     </ol>    
     
     </p>
+    <p>
+        La page <B>MON COMPTE</B> permet de modifier le login et le mot de passe de l'administrateur
+    </p>
+    <p>
+        La page <B>NAGEURS</B> affiche tous les agents, pour chaque agent on affiche ses performances ainsi que les compétions auxquelles il a participé. 
+        Pour afficher le score d'un nageur pour une épreuve donnée il faut filtrer les performances du nageur par épreuve et par année.
+    </p>
     
     
         <?php

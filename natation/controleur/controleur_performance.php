@@ -25,7 +25,7 @@ if ($_POST) {
 
     if (isset($_SESSION['idperformance'])) {
         //Verification du format du temps
-        if (!preg_match("/^([0-9]{1,2}:)*[0-9]{1,2}\.[0-9]{1,2}/i", $temps)) {
+        if (!preg_match("/^([0-9]{1,2}:)*[0-9]{1,2}\.[0-9]{1,2}$/i", $temps)) {
             header('Location: ../formulaire_performance.php?action=modif&message=Le temps défini est invalide');
         } elseif ($id_nageur === '') {
             header('Location: ../formulaire_performance.php?action=modif&message=Veuillez choisir un nageur');
@@ -39,7 +39,7 @@ if ($_POST) {
     } else {
         try {
             //Verification du format du temps
-            if (!preg_match("/^([0-9]{1,2}:)*[0-9]{1,2}\.[0-9]{1,2}/i", $temps)) {
+            if (!preg_match("/^([0-9]{1,2}:)*[0-9]{1,2}\.[0-9]{1,2}$/i", $temps)) {
                 header('Location: ../formulaire_performance.php?action=modif&message=Le temps défini est invalide');
             } elseif ($id_nageur === '') {
                 header('Location: ../formulaire_performance.php?action=modif&message=Veuillez choisir un nageur');

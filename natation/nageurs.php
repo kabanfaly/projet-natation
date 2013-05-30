@@ -15,32 +15,85 @@
         include 'model/class.type_nage.php';
         include 'model/class.competition.php';
         include 'model/class.categorie.php';
-        //Recherche des performances du nageur
-        $performances = performance::rechercherParNageur($id_nageur);
+        $id_type_nage = '';
+        $annee = '';
+        if ($_POST) {
+            //rechercher les performances du nageur par epreuve et par annee
+            $id_type_nage = $_POST['idtype_de_nage'];
+            $annee = $_POST['annee'];
+            //rechercher toutes les performances
+            if ($id_type_nage === '' && $annee === '') {
+                $performances = performance::rechercherParNageur($id_nageur);
+            } else
+            //rechercher toutes les performances d'une annee
+            if ($id_type_nage === '' && $annee !== '') {
+                $performances = performance::rechercherParNageurAnnee($id_nageur, $annee);
+            } else
+            //rechercher toutes les performances par epreuve
+            if ($id_type_nage !== '' && $annee === '') {
+                //rechercher les types de nage
+                $epreuves = epreuve::rechercherParType($id_type_nage);
+                $performances = array();
+                if ($epreuves) {
+                    foreach ($epreuves as $key => $epreuve) {
+                        //rechercher la performance pour l'epreuve
+                        $performance = performance::rechercherParNageurEpreuve($id_nageur, $epreuve['idepreuve']);
+                        if ($performance) {
+                            $performances = array_merge($performances, $performance);
+                        }
+                    }
+                }
+            } else {//rechercher toutes performances sur une epreuve pour une annee donnee
+                //rechercher les types de nage
+                $epreuves = epreuve::rechercherParType($id_type_nage);
+                $performances = array();
+                if ($epreuves) {
+                    foreach ($epreuves as $key => $epreuve) {
+                        //rechercher la performance pour l'epreuve
+                        $performance = performance::rechercherParNageurEpreveuveAnnee($id_nageur, $epreuve['idepreuve'], $annee);
+                        if ($performance) {
+                            $performances = array_merge($performances, $performance);
+                        }
+                    }
+                }
+            }
+        } else {
+            //Recherche toutes les performances du nageur
+            $performances = performance::rechercherParNageur($id_nageur);
+        }
         $type_nages = type_nage::rechercherTout();
         ?>
         <center>
 
             <div id="afficheur">
                 <h4>Performances</h4>
-                <form action="GET">
-                    Epreuve: <select name="idtype_de_nage">
-                         <option value="">Choisissez</option>
+                <form method="post">
+                    <input type="hidden" name="id" value="<?= $_GET['id'] ?>" >
+                    Epreuve: <select name="idtype_de_nage">                        
+                        <option value="">Toutes les &eacute;preuves</option>
                         <?php
                         if ($type_nages) {
                             foreach ($type_nages as $key => $type) {
-                                 echo '<option value="' . $type['idtype_de_nage'] . '">' . $type['type'] . '</option>';
+                                if ($type['idtype_de_nage'] == $type_nage) {
+                                    echo '<option value="' . $type['idtype_de_nage'] . '" selected="true">' . $type['type'] . '</option>';
+                                } else {
+                                    echo '<option value="' . $type['idtype_de_nage'] . '">' . $type['type'] . '</option>';
+                                }
                             }
                         }
                         ?>
                     </select>
                     &nbsp;&nbsp;
                     Ann&eacute;e: <select name="annee">
-                        <option value="">Choisissez</option>
+                        <option value="">Toutes les ann&eacute;es</option>
                         <?php
                         $date = intval(date('Y'));
                         for ($i = $date; $i >= $date - 10; $i--) {
-                            echo "<option value='$i'>$i</option>";
+                            if ($annee == $i) {
+                                echo "<option value='$i' selected='true'>$i</option>";
+                            } else {
+                                echo "<option value='$i'>$i</option>";
+                            }
                         }
                         ?>
                     </select>
@@ -55,8 +108,10 @@
                         <th>Points</th>
                     </tr>
                     <?php
+                    $minute = $seconde = $centieme = $points = 0;
                     if ($performances) {
                         $style = "lignePaire";
+
                         foreach ($performances as $key => $performance) {
                             if ($key % 2 == 0) {
                                 $style = "lignePaire";
@@ -75,10 +130,57 @@
                                 <td align="center"><?= $performance['points'] ?> </td>
                             </tr>
                             <?php
+                            //calcul du score sur epreuve pour une annee
+                            $points += intval($performance['points']);
+                            $explode = explode(':', $performance['temps']);
+                            //si la minute est definie (ex: 1:22.24)
+                            if (count($explode) == 2) {
+                                //calcul des minutes
+                                $minute += intval($explode[0]);
+                                //calcul des secondes
+                                $explode2 = explode('.', $explode[1]);
+                                $seconde += intval($explode2[0]);
+                                if ($seconde >= 60) {
+                                    $reste = $seconde - 60;
+                                    $minute += 1;
+                                    $seconde = $reste;
+                                }
+                                //calcul des centiemes de secondes
+                                $centieme += intval($explode2[1]);
+                                if ($centieme >= 100) {
+                                    $reste = $centieme - 100;
+                                    $seconde += 1;
+                                    $centieme = $reste;
+                                }
+                            } else {//si la minute n'est pas definie (ex: 22.24)
+                                $explode = explode('.', $performance['temps']);
+                                //calcul des secondes
+                                $seconde += intval($explode[0]);
+                                if ($seconde >= 60) {
+                                    $reste = $seconde - 60;
+                                    $minute += 1;
+                                    $seconde = $reste;
+                                }
+                                //calcul des centiemes de secondes
+                                $centieme += intval($explode[1]);
+                                if ($centieme >= 100) {
+                                    $reste = $centieme - 100;
+                                    $seconde += 1;
+                                    $centieme = $reste;
+                                }
+                            }
                         }
                     }
+
+                    //calcul du score sur une epreuve
                     ?>
+
                 </table>
+                <?php
+                echo "<div>Score total:<b> $minute:$seconde.$centieme </b>$points pts</div>";
+                ?>
+
+
 
                 <?php
                 //Competiton auquelles a participite le nageur
