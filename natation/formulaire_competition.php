@@ -48,9 +48,9 @@
                                             $age = intval(date('Y')) - intval($explode[0]);
                                             $categorie = categorie::rechercherParId($nageur['idcategorie']);
                                             if (isset($_SESSION['contenu_competition']) && $_SESSION['contenu_competition']['idnageur'] === $nageur['idnageur']) {
-                                                echo '<option value="' . $nageur['idnageur'] . '" selected="true">' . $nageur['nom'] . ' ' . $nageur['prenom'] . ' - '.$age.' ans (' . $categorie['categorie'] . ')</option>';
+                                                echo '<option value="' . $nageur['idnageur'] . '" selected="true">' .  html_entity_decode($nageur['nom']) . ' ' . html_entity_decode($nageur['prenom'])  . ' - '.$age.' ans (' . html_entity_decode($categorie['categorie']) . ')</option>';
                                             } else {
-                                                echo '<option value="' . $nageur['idnageur'] . '">' . $nageur['nom'] . ' ' . $nageur['prenom'] . ' - '.$age.' ans (' . $categorie['categorie'] . ')</option>';
+                                                echo '<option value="' . $nageur['idnageur'] . '">' . html_entity_decode($nageur['nom']) . ' ' . html_entity_decode($nageur['prenom']) . ' - '.$age.' ans (' . html_entity_decode($categorie['categorie']) . ')</option>';
                                             }
                                         }
                                     }
@@ -68,9 +68,9 @@
                                         foreach ($epreuves as $key => $epreuve) {
                                             $type_nage = type_nage::rechercherParId($epreuve['idtype_de_nage']);
                                             if (isset($_SESSION['contenu_competition']) && $_SESSION['contenu_competition']['idepreuve'] === $epreuve['idepreuve']) {
-                                                echo '<option value="' . $epreuve['idepreuve'] . '" selected="true">' . $type_nage['type'] . ' (' . $epreuve['distance'] . ')' . '</option>';
+                                                echo '<option value="' . $epreuve['idepreuve'] . '" selected="true">' . html_entity_decode($type_nage['type']) . ' (' . $epreuve['distance'] . ')' . '</option>';
                                             } else {
-                                                echo '<option value="' . $epreuve['idepreuve'] . '">' . $type_nage['type'] . ' (' . $epreuve['distance'] . ')' . '</option>';
+                                                echo '<option value="' . $epreuve['idepreuve'] . '">' . html_entity_decode($type_nage['type']) . ' (' . $epreuve['distance'] . ')' . '</option>';
                                             }
                                         }
                                     }
