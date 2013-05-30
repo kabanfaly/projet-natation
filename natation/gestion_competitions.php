@@ -64,8 +64,8 @@ unset($_SESSION['contenu_competition']);
                             $age = intval(date('Y')) - intval($explode[0]);
                             ?>
                             <tr id="<?= $style ?>">
-                                <td align="center"><?= $nageur['nom'] . ' ' . $nageur['prenom'] . ' - '.$age.' ans (' . $categorie['categorie'] . ')'?> </td>
-                                <td align="center"><?= $type_nage['type'] . ' (' . $epreuve['distance'] . ')' ?> </td>
+                                <td align="center"><?= html_entity_decode($nageur['nom']) . ' ' . html_entity_decode($nageur['prenom']) . ' - '.$age.' ans (' . html_entity_decode($categorie['categorie']) . ')'?> </td>
+                                <td align="center"><?= html_entity_decode($type_nage['type']) . ' (' . $epreuve['distance'] . ')' ?> </td>
                                 <td align="center"><?= $competition['annee'] ?> </td>
                                 <td align="center">
                                     <a href="controleur/controleur_competition.php?idmodif=<?= $competition['idcompetition'] ?>"><img src="images/edit.png"/></a>
