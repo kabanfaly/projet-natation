@@ -29,14 +29,14 @@
                             <tr>
                                 <td id="libelle">Cat&eacute;gorie:</td><td><input type="text" name="categorie" value="<?php
                                                                                   if (isset($_SESSION['contenu_categorie'])) {
-                                                                                      echo $_SESSION['contenu_categorie']['categorie'];
+                                                                                      echo html_entity_decode($_SESSION['contenu_categorie']['categorie']);
                                                                                   }
                                                                                   ?>" required="true"/></td>
                             </tr>                                  
                             <tr>
                                 <td id="libelle">Description:</td><td><input type="text" name="description" value="<?php
                                                                                   if (isset($_SESSION['contenu_categorie'])) {
-                                                                                      echo $_SESSION['contenu_categorie']['description'];
+                                                                                      echo html_entity_decode($_SESSION['contenu_categorie']['description']);
                                                                                   }
                                                                                   ?>" required="true"/></td>
                             </tr>                                  

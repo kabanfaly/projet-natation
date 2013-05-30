@@ -29,7 +29,7 @@
                             <tr>
                                 <td id="libelle">Type:</td><td><input type="text" name="type" value="<?php
                                                                       if (isset($_SESSION['contenu_type_nage'])) {
-                                                                          echo $_SESSION['contenu_type_nage']['type'];
+                                                                          echo html_entity_decode($_SESSION['contenu_type_nage']['type']);
                                                                       }
                                                                       ?>" required="true"/></td>
                             </tr>                                  

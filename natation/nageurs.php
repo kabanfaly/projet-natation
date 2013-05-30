@@ -7,7 +7,7 @@
         //rechercher le nageur par son id
         $id_nageur = $_GET['id'];
         $nageur = nageur::rechercherParId($id_nageur);
-        echo '<center><h3>' . $nageur['nom'] . ' ' . $nageur['prenom'] . '</h3></center>';
+        echo '<center><h3>' . html_entity_decode($nageur['nom']) . ' ' . html_entity_decode($nageur['prenom']) . '</h3></center>';
 
         //performances du nageur
         include './model/class.performance.php';

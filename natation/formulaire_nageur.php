@@ -27,14 +27,14 @@
                         <tr>
                             <td id="libelle">Nom:</td><td><input type="text" name="nom" value="<?php
                                 if (isset($_SESSION['contenu_nageur'])) {
-                                    echo $_SESSION['contenu_nageur']['nom'];
+                                    echo html_entity_decode($_SESSION['contenu_nageur']['nom']);
                                 }
                                 ?>" required="true"/></td>
                         </tr>
                         <tr>
                             <td id="libelle">Pr&eacute;nom:</td><td><input type="text" name="prenom" value="<?php
                                 if (isset($_SESSION['contenu_nageur'])) {
-                                    echo $_SESSION['contenu_nageur']['prenom'];
+                                    echo html_entity_decode($_SESSION['contenu_nageur']['prenom']);
                                 }
                                 ?>" required="true"/></td>
                         </tr>
@@ -59,9 +59,9 @@
                                     if ($categories) {
                                         foreach ($categories as $key => $categorie) {
                                             if (isset($_SESSION['contenu_nageur']) && $_SESSION['contenu_nageur']['idcategorie'] === $categorie['idcategorie']) {
-                                                echo '<option value="' . $categorie['idcategorie'] . '" selected="true">' . $categorie['categorie'] . '</option>';
+                                                echo '<option value="' . $categorie['idcategorie'] . '" selected="true">' . html_entity_decode($categorie['categorie']) . '</option>';
                                             } else {
-                                                echo '<option value="' . $categorie['idcategorie'] . '">' . $categorie['categorie'] . '</option>';
+                                                echo '<option value="' . $categorie['idcategorie'] . '">' . html_entity_decode($categorie['categorie']) . '</option>';
                                             }
                                         }
                                     }
