@@ -8,7 +8,6 @@
     include 'model/class.epreuve.php';
     include 'model/class.type_nage.php';
     include 'model/class.competition.php';
-    include 'model/class.categorie.php';
     ?>
     <center>
         <div id="afficheur">
@@ -22,7 +21,6 @@
                 <tr>
                     <th>Nageur</th>
                     <th>Epreuve</th>
-                    <th>Cat&eacute;gorie ma&icirc;tre</th>
                     <th>ann&eacute;e</th>
                 </tr>
                 <?php
@@ -40,13 +38,10 @@
                         $epreuve = epreuve::rechercherParId($competition['idepreuve']);
                         //recherche du type de nage a partir de l'epreuve
                         $type_nage = type_nage::rechercherParId($epreuve['idtype_de_nage']);
-                        //recherche de la categorie maitre par son id
-                        $categorie = categorie::rechercherParId($competition['idcategorie']);
                         ?>
                         <tr id="<?= $style ?>">
                             <td align="center"><?= $nageur['nom'] . ' ' . $nageur['prenom'] ?> </td>
                             <td align="center"><?= $type_nage['type'] . ' (' . $epreuve['distance'] . ')' ?> </td>
-                            <td align="center"><?= $categorie['categorie'] ?> </td>
                             <td align="center"><?= $competition['annee'] ?> </td>
                         </tr>
                         <?php

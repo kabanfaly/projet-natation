@@ -73,11 +73,19 @@
                                 </select>
                             </td>
                         </tr>
+                        <tr>
+                            <td id="libelle">Ann&eacute;e:</td><td><input type="text" name="annee" size="5" value="<?php
+                            if (isset($_SESSION['contenu_performance'])) {
+                                echo $_SESSION['contenu_performance']['annee'];
+                            }
+                            ?>" required="true"/></td>
+                        </tr>
+                        <tr>
                         <td id="libelle">Temps:</td><td><input type="text" name="temps" size="5" value="<?php
                             if (isset($_SESSION['contenu_performance'])) {
                                 echo $_SESSION['contenu_performance']['temps'];
                             }
-                            ?>" required="true"/>(HH:mm:ss)</td>
+                            ?>" required="true"/>(ss.cs ou mm:ss.cs => minute:seconce.centi&eacute;me de seconde)</td>
                         </tr>
                         </tr>
                         <td id="libelle">Points:</td><td><input type="text" name="points" size="5" value="<?php

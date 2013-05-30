@@ -18,23 +18,40 @@ if ($_POST) {
     $id_epreuve = mysql_escape_string($_POST['idepreuve']);
     $temps = mysql_escape_string($_POST['temps']);
     $points = mysql_escape_string($_POST['points']);
+    $annee = mysql_escape_string($_POST['annee']);
 
     //Enregistrement des contenus tapes par l'utilisateur
     $_SESSION['contenu_performance'] = $_POST;
 
     if (isset($_SESSION['idperformance'])) {
-        if (performance::modifier($_SESSION['idperformance'], $points, $temps, $id_nageur, $id_epreuve)) {
+        //Verification du format du temps
+        if (!preg_match("/^([0-9]{1,2}:)*[0-9]{1,2}\.[0-9]{1,2}/i", $temps)) {
+            header('Location: ../formulaire_performance.php?action=modif&message=Le temps défini est invalide');
+        } elseif ($id_nageur === '') {
+            header('Location: ../formulaire_performance.php?action=modif&message=Veuillez choisir un nageur');
+        } elseif ($id_epreuve === '') {
+            header('Location: ../formulaire_performance.php?action=modif&message=Veuillez choisir une épreuve');
+        } elseif (performance::modifier($_SESSION['idperformance'], $points, $temps, $id_nageur, $id_epreuve, $annee)) {
             //Redirection vers la page de gestion des performances
             unset($_SESSION['contenu_performance']);
             header('Location: ../gestion_performances.php?message=La modification a été effectuée avec succès');
         }
     } else {
         try {
-            //Enregistrement
-            performance::enregistrer( $points, $temps, $id_nageur, $id_epreuve);
+            //Verification du format du temps
+            if (!preg_match("/^([0-9]{1,2}:)*[0-9]{1,2}\.[0-9]{1,2}/i", $temps)) {
+                header('Location: ../formulaire_performance.php?action=modif&message=Le temps défini est invalide');
+            } elseif ($id_nageur === '') {
+                header('Location: ../formulaire_performance.php?action=modif&message=Veuillez choisir un nageur');
+            } elseif ($id_epreuve === '') {
+                header('Location: ../formulaire_performance.php?action=modif&message=Veuillez choisir une épreuve');
+            } else {
+                //Enregistrement
+                performance::enregistrer($points, $temps, $id_nageur, $id_epreuve, $annee);
 
-            //Redirection vers la page de gestion des performance
-            header('Location: ../gestion_performances.php?message=L\'enregistrement a été effectuée avec succès');
+                //Redirection vers la page de gestion des performance
+                header('Location: ../gestion_performances.php?message=L\'enregistrement a été effectuée avec succès');
+            }
         } catch (Exception $exc) {
             header('Location: ../formulaire_performance.php?action=ajout&message=' . $exc->getMessage());
         }

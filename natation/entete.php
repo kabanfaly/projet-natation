@@ -61,6 +61,13 @@ if (strpos($page, 'competitions') !== false) {
                             }
                             ?>">Mon compte</li>
                         </a>
+                        <a href="aide.php">
+                            <li id="<?php
+                            if (strpos($page, '/aide') !== false) {
+                                echo 'current';
+                            }
+                            ?>">Aide</li>
+                        </a>
                         <a href="controleur/deconnexion.php">
                             <li>D&eacute;connexion</li>
                         </a>     
@@ -102,27 +109,27 @@ if (strpos($page, 'competitions') !== false) {
                             }
                             ?>"><a href="gestion_nageurs.php">Gestion des nageurs</a></li>
                             <li id="<?php
-                            if (strpos($page, 'gestion_types_nage') !== false) {
+                            if (strpos($page, 'gestion_types_nage') !== false  || strpos($page, 'formulaire_type_nage') !== false) {
                                 echo 'current2';
                             }
                             ?>"><a href="gestion_types_nage.php">Gestion des types de nage</a></li>
                             <li id="<?php
-                            if (strpos($page, 'gestion_epreuves') !== false) {
+                            if (strpos($page, 'gestion_epreuves') !== false  || strpos($page, 'formulaire_epreuve') !== false) {
                                 echo 'current2';
                             }
                             ?>"><a href="gestion_epreuves.php">Gestion des &eacute;preuves</a></li>
                             <li id="<?php
-                            if (strpos($page, 'gestion_categories') !== false) {
+                            if (strpos($page, 'gestion_categories') !== false  || strpos($page, 'formulaire_categorie') !== false) {
                                 echo 'current2';
                             }
                             ?>"><a href="gestion_categories.php">Gestion des cat&eacute;gories</a></li>
                             <li id="<?php
-                            if (strpos($page, 'gestion_competitions') !== false) {
+                            if (strpos($page, 'gestion_competitions') !== false  || strpos($page, 'formulaire_competition') !== false) {
                                 echo 'current2';
                             }
                             ?>"><a href="gestion_competitions.php">Gestion des comp&eacute;titions</a></li>
                             <li id="<?php
-                            if (strpos($page, 'gestion_performances') !== false) {
+                            if (strpos($page, 'gestion_performances') !== false  || strpos($page, 'formulaire_performance') !== false) {
                                 echo 'current2';
                             }
                             ?>"><a href="gestion_performances.php">Gestion des performances</a></li>

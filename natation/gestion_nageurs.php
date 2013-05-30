@@ -53,10 +53,10 @@ unset($_SESSION['contenu_nageur']);
                             $categorie = categorie::rechercherParId($nageur['idcategorie']);
                             ?>
                             <tr id="<?= $style ?>">
-                                <td><?= $nageur['nom'] . ' ' . $nageur['prenom'] ?> </td>
+                                <td><?= html_entity_decode($nageur['nom']) . ' ' . html_entity_decode($nageur['prenom']) ?> </td>
                                 <td align="center"><?= $nageur['date_de_naissance'] ?> </td>
                                 <td align="center"><?= $nageur['sexe'] ?> </td>
-                                <td align="center"><?= $categorie['categorie'] ?> </td>
+                                <td align="center"><?= html_entity_decode($categorie['categorie']) ?> </td>
                                 <td align="center">
                                     <a href="controleur/controleur_nageur.php?idmodif=<?= $nageur['idnageur'] ?>"><img src="images/edit.png"/></a>
                                     <span onclick="if (confirm('Voulez vous supprimer ce nageur?')) {

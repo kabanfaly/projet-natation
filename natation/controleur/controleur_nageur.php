@@ -14,10 +14,10 @@ include '../model/class.nageur.php';
 if ($_POST) {
 
     //Recuparation des donnees du formulaire
-    $nom = mysql_escape_string($_POST['nom']);
-    $prenom = mysql_escape_string($_POST['prenom']);
+    $nom = htmlentities(mysql_escape_string($_POST['nom']));
+    $prenom = htmlentities(mysql_escape_string($_POST['prenom']));
     $date_naissance = mysql_escape_string($_POST['date_de_naissance']);
-    $sexe = mysql_escape_string($_POST['sexe']);
+    $sexe = htmlentities(mysql_escape_string($_POST['sexe']));
     $idcategorie = mysql_escape_string($_POST['idcategorie']);
 
     //Enregistrement des contenus tapes par l'utilisateur

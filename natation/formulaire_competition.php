@@ -32,7 +32,8 @@
                     //rechercher tous les nageurs
                     $nageurs = nageur::rechercherTout();
                     //rechercher toutes les epreuves
-                    $epreuves = epreuve::rechercherTout();                    
+                    $epreuves = epreuve::rechercherTout();
+                    
                     ?>
                     <form method="post" action="controleur/controleur_competition.php">            
                         <tr>
@@ -40,14 +41,16 @@
                             <td>
                                 <select name="idnageur">
                                     <option value="">Choisissez</option>
-                                    <?php
-                                    if ($nageurs) {                                        
+                                    <?php                                   
+                                    if ($nageurs) {
                                         foreach ($nageurs as $key => $nageur) {
+                                            $explode = explode('-', $nageur['date_de_naissance']);
+                                            $age = intval(date('Y')) - intval($explode[0]);
                                             $categorie = categorie::rechercherParId($nageur['idcategorie']);
                                             if (isset($_SESSION['contenu_competition']) && $_SESSION['contenu_competition']['idnageur'] === $nageur['idnageur']) {
-                                                echo '<option value="' . $nageur['idnageur'] . '" selected="true">' . $nageur['nom'] . ' ' . $nageur['prenom'] . ' ('.$categorie['categorie'].')</option>';
+                                                echo '<option value="' . $nageur['idnageur'] . '" selected="true">' . $nageur['nom'] . ' ' . $nageur['prenom'] . ' - '.$age.' ans (' . $categorie['categorie'] . ')</option>';
                                             } else {
-                                                echo '<option value="' . $nageur['idnageur'] . '">' . $nageur['nom'] . ' ' . $nageur['prenom'] . ' ('.$categorie['categorie'].')</option>';
+                                                echo '<option value="' . $nageur['idnageur'] . '">' . $nageur['nom'] . ' ' . $nageur['prenom'] . ' - '.$age.' ans (' . $categorie['categorie'] . ')</option>';
                                             }
                                         }
                                     }

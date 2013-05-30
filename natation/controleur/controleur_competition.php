@@ -22,18 +22,28 @@ if ($_POST) {
     $_SESSION['contenu_competition'] = $_POST;
 
     if (isset($_SESSION['idcompetition'])) {
-        if (competition::modifier($_SESSION['idcompetition'], $annee, $idnageur, $idepreuve)) {
+        if ($idnageur === '') {
+            header('Location: ../formulaire_competition.php?action=modif&message=Veuillez choisir un nageur');
+        } elseif ($idepreuve === '') {
+            header('Location: ../formulaire_competition.php?action=modif&message=Veuillez choisir une épreuve');
+        } elseif (competition::modifier($_SESSION['idcompetition'], $annee, $idnageur, $idepreuve)) {
             //Redirection vers la page de gestion des competitions
             unset($_SESSION['contenu_competition']);
             header('Location: ../gestion_competitions.php?message=La modification a été effectuée avec succès');
         }
     } else {
         try {
-            //Enregistrement
-            competition::enregistrer($annee, $idnageur, $idepreuve);
+            if ($idnageur === '') {
+                header('Location: ../formulaire_competition.php?action=ajout&message=Veuillez choisir un nageur');
+            } elseif ($idepreuve === '') {
+                header('Location: ../formulaire_competition.php?action=ajout&message=Veuillez choisir une épreuve');
+            } else {
+                //Enregistrement
+                competition::enregistrer($annee, $idnageur, $idepreuve);
 
-            //Redirection vers la page de gestion des competition
-            header('Location: ../gestion_competitions.php?message=L\'enregistrement a été effectuée avec succès');
+                //Redirection vers la page de gestion des competition
+                header('Location: ../gestion_competitions.php?message=L\'enregistrement a été effectuée avec succès');
+            }
         } catch (Exception $exc) {
             header('Location: ../formulaire_competition.php?action=ajout&message=' . $exc->getMessage());
         }

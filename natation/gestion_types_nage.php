@@ -47,7 +47,7 @@ unset($_SESSION['contenu_type_nage']);
                             }
                             ?>
                             <tr id="<?= $style ?>">
-                                <td align="center"><?= $type_nage['type'] ?> </td>
+                                <td align="center"><?= html_entity_decode($type_nage['type']) ?> </td>
                                 <td align="center">
                                     <a href="controleur/controleur_type_nage.php?idmodif=<?= $type_nage['idtype_de_nage'] ?>"><img src="images/edit.png"/></a>
                                     <span onclick="if (confirm('Voulez vous supprimer ce type de nage?')) {

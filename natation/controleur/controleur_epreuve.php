@@ -22,17 +22,23 @@ if ($_POST) {
 
 
     if (isset($_SESSION['idepreuve'])) {
-        if (epreuve::modifier($_SESSION['idepreuve'], $id_type_de_nage, $distance)) {
+        if ($id_type_de_nage === '') {
+            header('Location: ../formulaire_epreuve.php?action=modif&message=Veuillez choisir un type de nage');
+        } elseif (epreuve::modifier($_SESSION['idepreuve'], $id_type_de_nage, $distance)) {
             //Redirection vers la page de gestion des epreuves
             header('Location: ../gestion_epreuves.php?message=La modification a été effectuée avec succès');
         }
     } else {
         try {
-            //Enregistrement
-            epreuve::enregistrer( $id_type_de_nage, $distance);
+            if ($id_type_de_nage === '') {
+                header('Location: ../formulaire_epreuve.php?action=ajout&message=Veuillez choisir un type de nage');
+            } else {
+                //Enregistrement
+                epreuve::enregistrer($id_type_de_nage, $distance);
 
-            //Redirection vers la page de gestion des nageurs
-            header('Location: ../gestion_epreuves.php?message=L\'enregistrement a été effectuée avec succès');
+                //Redirection vers la page de gestion des nageurs
+                header('Location: ../gestion_epreuves.php?message=L\'enregistrement a été effectuée avec succès');
+            }
         } catch (Exception $exc) {
             header('Location: ../formulaire_epreuve.php?action=ajout&message=' . $exc->getMessage());
         }

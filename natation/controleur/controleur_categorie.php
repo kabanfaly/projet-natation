@@ -14,8 +14,8 @@ include '../model/class.categorie.php';
 if ($_POST) {
 
     //Recuperation des donnees du formulaire
-    $categorie = mysql_escape_string($_POST['categorie']);
-    $description = mysql_escape_string($_POST['description']);
+    $categorie = htmlentities(mysql_escape_string($_POST['categorie']));
+    $description = htmlentities(mysql_escape_string($_POST['description']));
 
     //Enregistrement des contenus tapés par l'utilisateur
     $_SESSION['contenu_categorie'] = $_POST;

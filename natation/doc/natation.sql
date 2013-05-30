@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le : Mar 28 Mai 2013 à 21:06
+-- Généré le : Jeu 30 Mai 2013 à 04:11
 -- Version du serveur: 5.5.31
 -- Version de PHP: 5.3.10-1ubuntu3.6
 
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `administrateur` (
   `login` varchar(45) NOT NULL,
   `mot_de_passe` varchar(45) NOT NULL,
   PRIMARY KEY (`idadmin`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `categorie` (
   `categorie` varchar(45) NOT NULL,
   `description` varchar(45) NOT NULL,
   PRIMARY KEY (`idcategorie`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 -- --------------------------------------------------------
 
@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `nageur` (
   `idcategorie` int(11) NOT NULL,
   PRIMARY KEY (`idnageur`),
   KEY `idcategorie` (`idcategorie`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -102,13 +102,14 @@ DROP TABLE IF EXISTS `performance`;
 CREATE TABLE IF NOT EXISTS `performance` (
   `idperformance` int(11) NOT NULL AUTO_INCREMENT,
   `points` int(11) DEFAULT NULL,
-  `temps` time DEFAULT NULL,
+  `temps` varchar(45) NOT NULL,
   `idnageur` int(11) NOT NULL,
   `idepreuve` int(11) NOT NULL,
+  `annee` int(11) NOT NULL,
   PRIMARY KEY (`idperformance`),
   KEY `fk_performance_nageur1_idx` (`idnageur`),
   KEY `fk_performance_epreuve1_idx` (`idepreuve`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
@@ -121,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `type_de_nage` (
   `idtype_de_nage` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(45) NOT NULL,
   PRIMARY KEY (`idtype_de_nage`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Contraintes pour les tables exportées

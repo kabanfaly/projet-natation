@@ -48,8 +48,8 @@ unset($_SESSION['contenu_categorie']);
                             }
                             ?>
                             <tr id="<?= $style ?>">
-                                <td align="center"><?= $categorie['categorie'] ?> </td>
-                                <td align="center"><?= $categorie['description'] ?> </td>
+                                <td align="center"><?= html_entity_decode($categorie['categorie']) ?> </td>
+                                <td align="center"><?= html_entity_decode($categorie['description']) ?> </td>
                                 <td align="center">
                                     <a href="controleur/controleur_categorie.php?idmodif=<?= $categorie['idcategorie'] ?>"><img src="images/edit.png"/></a>
                                     <span onclick="if (confirm('Voulez vous supprimer cette catégorie?')) {

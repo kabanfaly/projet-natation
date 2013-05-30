@@ -34,9 +34,9 @@ class performance {
      * Ajoute une nouvelle performance
      * @return boolean
      */
-    public static function enregistrer($points, $temps, $id_nageur, $id_epreuve) {
-        mysql_query("INSERT INTO `".self::$table."` (`points`, `temps`, `idnageur`, `idepreuve`) VALUES "
-                        . "('$points', '$temps', '$id_nageur', '$id_epreuve')") or die(mysql_error());
+    public static function enregistrer($points, $temps, $id_nageur, $id_epreuve, $annee) {
+        mysql_query("INSERT INTO `".self::$table."` (`points`, `temps`, `idnageur`, `idepreuve`, `annee`) VALUES "
+                        . "('$points', '$temps', '$id_nageur', '$id_epreuve', '$annee')") or die(mysql_error());
         return true;
     }
 
@@ -49,8 +49,8 @@ class performance {
      * @param int $id_epreuve
      * @return boolean
      */
-    public static function modifier($idperformance, $points, $temps, $id_nageur, $id_epreuve) {
-        mysql_query("UPDATE `".self::$table."` SET `points` = '$points', `temps` = '$temps', `idnageur` = '$id_nageur', `idepreuve` = '$id_epreuve'"
+    public static function modifier($idperformance, $points, $temps, $id_nageur, $id_epreuve, $annee) {
+        mysql_query("UPDATE `".self::$table."` SET `points` = '$points', `temps` = '$temps', `idnageur` = '$id_nageur', `idepreuve` = '$id_epreuve', `annee` = '$annee'"
                         . " WHERE `".self::$cle_primaire."` = '$idperformance'") or die(mysql_error());
         return true;
     }
@@ -85,6 +85,25 @@ class performance {
      */
     public static function rechercherParNageur($id_nageur) {
         $res = mysql_query("SELECT * FROM `".self::$table."` WHERE `idnageur` =  '$id_nageur'") or die(mysql_error());
+        if (mysql_num_rows($res) != 0) {
+            $performances = array();
+            //Recuperer toutes les lignes trouves
+            while (($ligne = mysql_fetch_array($res)) !== FALSE) {
+                $performances[] = $ligne;
+            }
+            return $performances;
+        }
+        return false;
+    }
+
+        /**
+     * Recherche les performances d'un nageur
+     * @param int $id_nageur l'id du nageur
+     * @return boolean | array, false si aucune performance correspondante n'a ete trouvee, sinon retourne les performances du nageur 
+     * dans un tableau
+     */
+    public static function rechercherParNageurAnnee($id_nageur, $annee) {
+        $res = mysql_query("SELECT * FROM `".self::$table."` WHERE `idnageur` =  '$id_nageur' AND `annee` = '$annee' ORDER BY `idperformance` DESC") or die(mysql_error());
         if (mysql_num_rows($res) != 0) {
             $performances = array();
             //Recuperer toutes les lignes trouves
@@ -140,7 +159,7 @@ class performance {
      */
     public static function rechercherTout(){
          //Recuperer toutes les performances
-        $res = mysql_query("SELECT * FROM `".self::$table."`") or die(mysql_error());
+        $res = mysql_query("SELECT * FROM `".self::$table."` ORDER BY `idnageur` DESC") or die(mysql_error());
         if (mysql_num_rows($res) != 0) {
             $performances = array();
             //Recuperer toutes les lignes trouvees

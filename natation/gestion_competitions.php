@@ -58,17 +58,20 @@ unset($_SESSION['contenu_competition']);
                             $epreuve = epreuve::rechercherParId($competition['idepreuve']);
                             //recherche du type de nage a partir de l'epreuve
                             $type_nage = type_nage::rechercherParId($epreuve['idtype_de_nage']);
-                            //recherche de la categorie maitre par son id
+                            //recheche de la categorie du nageur
+                            $categorie = categorie::rechercherParId($nageur['idcategorie']);
+                            $explode = explode('-', $nageur['date_de_naissance']);
+                            $age = intval(date('Y')) - intval($explode[0]);
                             ?>
                             <tr id="<?= $style ?>">
-                                <td align="center"><?= $nageur['nom'] . ' ' . $nageur['prenom'] ?> </td>
+                                <td align="center"><?= $nageur['nom'] . ' ' . $nageur['prenom'] . ' - '.$age.' ans (' . $categorie['categorie'] . ')'?> </td>
                                 <td align="center"><?= $type_nage['type'] . ' (' . $epreuve['distance'] . ')' ?> </td>
                                 <td align="center"><?= $competition['annee'] ?> </td>
                                 <td align="center">
                                     <a href="controleur/controleur_competition.php?idmodif=<?= $competition['idcompetition'] ?>"><img src="images/edit.png"/></a>
                                     <span onclick="if (confirm('Voulez vous supprimer cette competition?')) {
-                                                        document.location.href = 'controleur/controleur_competition.php?idsuppression=<?= $competition['idcompetition'] ?>';
-                                                    }"><img src="images/delete.png"/></span>
+                                                document.location.href = 'controleur/controleur_competition.php?idsuppression=<?= $competition['idcompetition'] ?>';
+                                            }"><img src="images/delete.png"/></span>
                                 </td>
                             </tr>
                             <?php

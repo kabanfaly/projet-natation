@@ -146,7 +146,7 @@ class competition {
      */
     public static function rechercherTout(){
          //Recuperer toutes les competitions
-        $res = mysql_query("SELECT * FROM `".self::$table."`") or die(mysql_error());
+        $res = mysql_query("SELECT * FROM `".self::$table."` ORDER BY `idnageur` DESC") or die(mysql_error());
         if (mysql_num_rows($res) != 0) {
             $competitions = array();
             //Recuperer toutes les lignes trouvees

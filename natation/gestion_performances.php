@@ -23,6 +23,7 @@ unset($_SESSION['contenu_performance']);
                         <th>Nageur</th>
                         <th>Epreuve</th>
                         <th>Temps</th>
+                        <th>Ann&eacute;e</th>
                         <th>Points</th>
                         <th>Op&eacute;rations</th>
                     </tr>
@@ -63,6 +64,7 @@ unset($_SESSION['contenu_performance']);
                                 <td align="center"><?= $nageur['nom'] . ' ' . $nageur['prenom'] ?> </td>
                                 <td align="center"><?= $type_nage['type'] . ' (' . $epreuve['distance'] . ')' ?> </td>
                                 <td align="center"><?= $performance['temps'] ?> </td>
+                                <td align="center"><?= $performance['annee'] ?> </td>
                                 <td align="center"><?= $performance['points'] ?> </td>
                                 <td align="center">
                                     <a href="controleur/controleur_performance.php?idmodif=<?= $performance['idperformance'] ?>"><img src="images/edit.png"/></a>

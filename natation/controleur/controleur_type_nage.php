@@ -14,7 +14,7 @@ include '../model/class.type_nage.php';
 if ($_POST) {
 
     //Recuparation des donnees du formulaire
-    $type = mysql_escape_string($_POST['type']);
+    $type = htmlentities(mysql_escape_string($_POST['type']));
 
     //Enregistrement des contenus tapes par l'utilisateur
     $_SESSION['contenu_type_nage'] = $_POST;
