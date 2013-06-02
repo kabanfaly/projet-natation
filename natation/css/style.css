@@ -25,10 +25,8 @@ body{
     background: url(../images/entete.png) no-repeat;
 }
 
-ul.menuH{
-    float: right;
-}
 .menuH li{
+    float: right;
     display: inline-table;
     list-style: none;
     margin-right: 5px;
