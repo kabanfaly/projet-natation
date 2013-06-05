@@ -1,3 +1,18 @@
-body{
-    background: url(images/bg.jpg);
+#principal{
+    margin-left: 20%;
+    margin-right: 20%;
+    width: 60%;
+    min-height: 1000px;
+    border: solid 1px black;
+    background-color: white;
+}
+#header{
+    background: url(images/bg.jpg) no-repeat;
+    height: 150px;
+    width: 100%;
+}
+#titre{
+    margin-left: 470px;
+    margin-top: 300px;
+    font-size: 20px;
 }
