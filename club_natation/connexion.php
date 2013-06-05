@@ -8,6 +8,7 @@
     <body>
         <div id="principal">
             <div id="header">
+                <div id="blank"></div>
                 <span id="titre">Club Omnisports Vernouillet</span>
             </div>
             <div id="menuHoriz">
@@ -39,6 +40,7 @@
                             if ($_POST['mot_de_passe'] != MOT_DE_PASSE) {
                                 echo '<div>Mot de passe incorrect</div>';
                             } else {
+                                session_register('connexionOK');
                                 $_SESSION['connexionOK'] = true;
                                 header('Location: index.php');
                             }
@@ -58,7 +60,7 @@
                                 <tr><td colspan="2"><input type="submit" value="Connexion"></td></tr>
                             </table>
                         </form>
-                       
+
                     </center>
                 </div>
             </div>
