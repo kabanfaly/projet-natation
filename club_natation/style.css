@@ -73,5 +73,9 @@ a {
     list-style: none;
 
 }
+#menuVert{
+    float: left;
+    margin-left: 10px;
+}
 
 
