@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le : Mar 04 Juin 2013 à 00:25
+-- Généré le : Jeu 06 Juin 2013 à 23:15
 -- Version du serveur: 5.5.31
 -- Version de PHP: 5.3.10-1ubuntu3.6
 
@@ -25,7 +25,6 @@ CREATE TABLE IF NOT EXISTS `categorie` (
   `id_categorie` int(11) NOT NULL AUTO_INCREMENT,
   `nom_categorie` varchar(50) NOT NULL,
   `description` text NOT NULL,
-  `sexe` varchar(50) NOT NULL,
   PRIMARY KEY (`id_categorie`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
@@ -33,14 +32,14 @@ CREATE TABLE IF NOT EXISTS `categorie` (
 -- Contenu de la table `categorie`
 --
 
-INSERT INTO `categorie` (`id_categorie`, `nom_categorie`, `description`, `sexe`) VALUES
-(1, 'Avenirs', '2004 et après', '''Homme'' OR ''Femme'''),
-(2, 'Poussins', '2002 et 2003', '''Homme'' OR ''Femme'''),
-(3, 'Benjamins', '2000 et 2001', '''Homme'' OR ''Femme'''),
-(4, 'Minimes', '1998 et 1999', '''Homme'' OR ''Femme'''),
-(5, 'Cadets', '1996 et 1997', '''Homme'' OR ''Femme'''),
-(6, 'Juniors', '1993, 1994 et 1995', '''Homme'' OR ''Femme'''),
-(7, 'Seniors', '1992 et avant', '''Homme'' OR ''Femme''');
+INSERT INTO `categorie` (`id_categorie`, `nom_categorie`, `description`) VALUES
+(1, 'Avenirs', '2004 et après'),
+(2, 'Poussins', '2002 et 2003'),
+(3, 'Benjamins', '2000 et 2001'),
+(4, 'Minimes', '1998 et 1999'),
+(5, 'Cadets', '1996 et 1997'),
+(6, 'Juniors', '1993, 1994 et 1995'),
+(7, 'Seniors', '1992 et avant');
 
 -- --------------------------------------------------------
 
@@ -171,7 +170,7 @@ CREATE TABLE IF NOT EXISTS `performance` (
   PRIMARY KEY (`id_performance`),
   KEY `id_epreuve` (`id_epreuve`),
   KEY `id_nageur` (`id_nageur`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
 -- Contraintes pour les tables exportées
@@ -187,5 +186,5 @@ ALTER TABLE `nageur`
 -- Contraintes pour la table `performance`
 --
 ALTER TABLE `performance`
-  ADD CONSTRAINT `performance_ibfk_2` FOREIGN KEY (`id_epreuve`) REFERENCES `epreuve` (`id_epreuve`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  ADD CONSTRAINT `performance_ibfk_1` FOREIGN KEY (`id_nageur`) REFERENCES `nageur` (`id_nageur`) ON DELETE CASCADE ON UPDATE NO ACTION;
+  ADD CONSTRAINT `performance_ibfk_1` FOREIGN KEY (`id_nageur`) REFERENCES `nageur` (`id_nageur`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `performance_ibfk_2` FOREIGN KEY (`id_epreuve`) REFERENCES `epreuve` (`id_epreuve`) ON DELETE CASCADE ON UPDATE NO ACTION;

@@ -49,6 +49,9 @@ if ($_POST) {
             </tr>
             <tr>
                 <td>Catégorie: </td>
+                <?php
+                $res = mysql_query("SELECT * FROM `categories`");                
+                ?>
                 <td><input type="text" name="id_categorie" ></td>
             </tr>
             <tr>
