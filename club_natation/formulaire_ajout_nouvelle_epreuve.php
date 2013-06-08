@@ -8,11 +8,11 @@ if ($_POST) {
             mysql_escape_string($_POST['distance_epreuve']) ."')";
 
     mysql_query($requete) or die(mysql_error());
-    $message = 'Enregistrement OK';
+    header('Location: ges_epreuves.php?message=Enregistrement OK');
 }
 ?>
 <div id="contenu">
-    <h2>Gestion des catégories</h2>
+    <h2>Ajouter une épreuve</h2>
     <div><?= $message ?></div>
     <form method="post">
         <table>

@@ -8,16 +8,16 @@ if ($_POST) {
             mysql_escape_string($_POST['description']) ."')";
 
     mysql_query($requete) or die(mysql_error());
-    $message = 'Enregistrement OK';
+    header('Location: ges_categories.php?message=Enregistrement OK');
 }
 ?>
 <div id="contenu">
-    <h2>Gestion des catégories</h2>
+    <h2>Ajouter une catégorie</h2>
     <div><?= $message ?></div>
     <form method="post">
         <table>
             <tr>
-                <td>Nom: </td>
+                <td>Catégorie: </td>
                 <td><input type="text" name="nom_categorie" required="true"></td>
             </tr>
             <tr>

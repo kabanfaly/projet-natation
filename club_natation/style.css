@@ -78,4 +78,12 @@ a {
     margin-left: 10px;
 }
 
-
+table{
+   border: solid 1px black;
+   width: 60%;
+   margin-bottom: 10%;
+}
+th{
+    background-color: #151515;
+    color: white;
+}
