@@ -35,7 +35,6 @@ if ($_POST) {
                 . mysql_escape_string($prenom_nageur) . "','" . $sexe . "','" 
                 . $date_naissance . "', " . mysql_escape_string($id_categorie) . " ,'"
                 . mysql_escape_string($club) . "')";
-        var_dump($requete);
         mysql_query($requete) or die(mysql_error());
         header('Location: ges_nageurs.php?message=Enregistrement OK');
     }

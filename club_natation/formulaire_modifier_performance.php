@@ -9,6 +9,23 @@ $saison = "";
 $temps_total = "";
 $date_perf = "";
 $points = "";
+if ($_GET) {
+    $id = $_GET['id'];
+    $res = mysql_query("SELECT * FROM `performance` WHERE `id_performance` =  $id") or die(mysql_error());
+    $performance = '';
+    if (mysql_num_rows($res) == 0) {
+        $message = '<span>Aucune performance correspondante trouvée</span>';
+    } else {
+        $performance = mysql_fetch_array($res);
+        $id_nageur = $performance['id_nageur'];
+        $id_epreuve = $performance['id_epreuve'];
+        $saison = $performance['saison'];
+        $temps_total = $performance['temps_total'];
+        $date = explode("-", $performance["date_perf"]);
+        $date_perf = $date[2] . '/' . $date[1] . '/' . $date[0];
+        $points = $performance['points'];
+    }
+}
 if ($_POST) {
     //recuperation de la valeur des champs    
     $id_nageur = $_POST['id_nageur'];
@@ -31,18 +48,16 @@ if ($_POST) {
     }
     if ($message == "") {
         $date_perf = $date[2] . "-" . $date[1] . "-" . $date[0];
-        $requete = "INSERT INTO `performance` (`id_nageur`,`id_epreuve`,`saison`,`date_perf`,`temps_total`,`points`) "
-                . "VALUES('" . $id_nageur . "','"
-                . $id_epreuve . "','" . $saison . "','"
-                . $date_perf . "', '" . temps_total . "' ,'"
-                . $points . "')";        
+        $requete = "UPDATE  `performance`  SET `id_nageur` = $id_nageur ,`id_epreuve` = '$id_epreuve',"
+                . " `saison` = '$saison',`date_perf` = '$date_perf',`temps_total` = '$temps_total', `points` = '$points' WHERE `id_performance` = " . $_GET['id'];
+
         mysql_query($requete) or die(mysql_error());
         header('Location: ges_performances.php?message=Enregistrement OK');
     }
 }
 ?>
 <div id="contenu">
-    <h2>Ajouter une performance</h2>
+    <h2>Modifier une performance</h2>
     <div><?= $message ?></div>
     <form method="post">
         <table>
@@ -104,7 +119,7 @@ if ($_POST) {
                 <td><input type="text" name="points"  required="true" value="<?= $points ?>"></td>
             </tr>
             <tr>
-                <td colspan="2"><input type="submit" value="Ajouter"></td>
+                <td colspan="2"><input type="submit" value="Modifier"></td>
             </tr>
         </table>
     </form>
