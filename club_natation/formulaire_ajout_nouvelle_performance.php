@@ -34,7 +34,7 @@ if ($_POST) {
         $requete = "INSERT INTO `performance` (`id_nageur`,`id_epreuve`,`saison`,`date_perf`,`temps_total`,`points`) "
                 . "VALUES('" . $id_nageur . "','"
                 . $id_epreuve . "','" . $saison . "','"
-                . $date_perf . "', '" . temps_total . "' ,'"
+                . $date_perf . "', '" . $temps_total . "' ,'"
                 . $points . "')";        
         mysql_query($requete) or die(mysql_error());
         header('Location: ges_performances.php?message=Enregistrement OK');
