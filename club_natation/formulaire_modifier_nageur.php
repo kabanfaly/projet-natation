@@ -99,7 +99,7 @@ if ($_POST) {
                 <td><input type="text" name="club"  required="true" value="<?= $club ?>"></td>
             </tr>
             <tr>
-                <td colspan="2"><input type="submit" value="Ajouter"></td>
+                <td colspan="2"><input type="submit" value="Modifier"></td>
             </tr>
         </table>
     </form>

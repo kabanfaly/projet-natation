@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le : Jeu 06 Juin 2013 à 23:15
+-- Généré le : Dim 09 Juin 2013 à 21:43
 -- Version du serveur: 5.5.31
 -- Version de PHP: 5.3.10-1ubuntu3.6
 
@@ -26,14 +26,14 @@ CREATE TABLE IF NOT EXISTS `categorie` (
   `nom_categorie` varchar(50) NOT NULL,
   `description` text NOT NULL,
   PRIMARY KEY (`id_categorie`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Contenu de la table `categorie`
 --
 
 INSERT INTO `categorie` (`id_categorie`, `nom_categorie`, `description`) VALUES
-(1, 'Avenirs', '2004 et après'),
+(1, 'Avenirs', '2004 et aprÃ¨s'),
 (2, 'Poussins', '2002 et 2003'),
 (3, 'Benjamins', '2000 et 2001'),
 (4, 'Minimes', '1998 et 1999'),
@@ -137,20 +137,19 @@ CREATE TABLE IF NOT EXISTS `nageur` (
   `prenom_nageur` varchar(50) NOT NULL,
   `sexe` varchar(50) NOT NULL,
   `annee_naissance` date NOT NULL,
-  `age` int(11) NOT NULL,
   `id_categorie` int(11) NOT NULL,
   `club` varchar(50) NOT NULL,
   PRIMARY KEY (`id_nageur`),
   KEY `id_categorie` (`id_categorie`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Contenu de la table `nageur`
 --
 
-INSERT INTO `nageur` (`id_nageur`, `nom_nageur`, `prenom_nageur`, `sexe`, `annee_naissance`, `age`, `id_categorie`, `club`) VALUES
-(1, 'COULOT', 'Christian', 'Homme', '0000-00-00', 0, 1, 'CO Vernouillet'),
-(2, 'KABA', 'N''faly', 'Homme', '1984-12-20', 0, 1, '');
+INSERT INTO `nageur` (`id_nageur`, `nom_nageur`, `prenom_nageur`, `sexe`, `annee_naissance`, `id_categorie`, `club`) VALUES
+(1, 'COULOT', 'Christian', 'Homme', '2013-06-14', 1, 'CO Vernouillet'),
+(2, 'Pierre', 'Andre', 'Homme', '1984-12-20', 1, 'CLUB');
 
 -- --------------------------------------------------------
 
@@ -165,12 +164,22 @@ CREATE TABLE IF NOT EXISTS `performance` (
   `id_epreuve` int(11) NOT NULL,
   `saison` year(4) NOT NULL,
   `date_perf` date NOT NULL,
-  `temps_total` time NOT NULL,
+  `temps_total` varchar(50) NOT NULL,
   `points` int(11) NOT NULL,
   PRIMARY KEY (`id_performance`),
   KEY `id_epreuve` (`id_epreuve`),
   KEY `id_nageur` (`id_nageur`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Contenu de la table `performance`
+--
+
+INSERT INTO `performance` (`id_performance`, `id_nageur`, `id_epreuve`, `saison`, `date_perf`, `temps_total`, `points`) VALUES
+(3, 2, 1, 2011, '2011-10-11', '23.23', 123),
+(4, 1, 1, 2012, '2012-10-11', '23.23', 124),
+(5, 1, 2, 2012, '2012-10-09', '23.23', 124),
+(6, 2, 4, 2010, '2010-10-11', '23.24', 124);
 
 --
 -- Contraintes pour les tables exportées

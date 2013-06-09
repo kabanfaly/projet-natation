@@ -36,8 +36,8 @@
                     if (isset($_SESSION['connexionOK']) && $_SESSION['connexionOK']) {
                         ?>
                         <div id="bloc2">
-                            <div id="nav2"><a href="ges_nageurs.php">Gestion des nageurs</a></div>
                             <div id="nav2"><a href="ges_categories.php">Gestion des catégories</a></div>
+                            <div id="nav2"><a href="ges_nageurs.php">Gestion des nageurs</a></div>
                             <div id="nav2"><a href="ges_epreuves.php">Gestion des épreuves</a></div>
                             <div id="nav2"><a href="ges_performances.php">Gestion des performances</a></div>
                         </div>

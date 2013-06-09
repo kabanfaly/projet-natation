@@ -1,0 +1,23 @@
+1. Pour commencer:
+- Créer une base de données nommée: `base club omnisports`
+- Importer le contenu du fichier base_sql_exportee/base_club_omnisports.sql dans la base de données
+- Modifier les accès (nom du serveur, login, mot de passe) à la base de données dans le fichier code_connexion_pdo.pdf 
+
+2. Utilisation
+- Administrateur:    
+    . Seul l'administrateur a le droit d'ajouter de modifier ou de supprimer des éléments
+    . Le login et le mot de passe de l'administrateur se trouvent dans le fichier identifiantAdmin.php
+        Login = admin 
+        Mot de passe = admin
+    . Les pages accessibles par l'admninistrateur
+        Gestion des catégories, Gestion des nageurs, Gestion épreuves, Gestion des performances.
+        Sur toutes ces pages, l'admnistrateur a la possibilité d'ajouter de modifier ou de supprimer des données.
+        . La pages de gestion des performances contient les temps intermédiaires par épreuve. Pour voir le temps total des temps intermédiaires
+          il faut aller sur la pages "Liste des nageurs" pour choisir un nageur ainsi on pourra afficher suivant un filtre tous les temps intermédiaires
+          du nageur suivant une épreuve choisie, puis on verra le temps total obtenu.
+        
+            
+
+
+
+
