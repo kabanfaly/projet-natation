@@ -118,7 +118,7 @@ include_once("code_connexion_pdo.php");
                             $res_epreuve = mysql_query("SELECT * FROM `epreuve` WHERE `id_epreuve` = " . $performance['id_epreuve']) or die(mysql_error());
                             $epreuve = mysql_fetch_array($res_epreuve);
                             ?>
-                            <tr id="<?= $style ?>">
+                            <tr>
                                 <td align="center"><?= $epreuve['type_epreuve'] . ' (' . $epreuve['distance_epreuve'] . ' m)' ?> </td>
                                 <td align="center"><?= $performance['saison'] ?> </td>
                                 <td align="center"><?= $performance['temps_total'] ?> </td>
