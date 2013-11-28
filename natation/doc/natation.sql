@@ -1,24 +1,11 @@
--- phpMyAdmin SQL Dump
--- version 3.4.10.1deb1
--- http://www.phpmyadmin.net
---
--- Client: localhost
--- Généré le : Jeu 30 Mai 2013 à 04:11
--- Version du serveur: 5.5.31
--- Version de PHP: 5.3.10-1ubuntu3.6
-
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
---
--- Base de données: `natation`
---
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
 
--- --------------------------------------------------------
-
---
--- Structure de la table `administrateur`
---
 
 DROP TABLE IF EXISTS `administrateur`;
 CREATE TABLE IF NOT EXISTS `administrateur` (
@@ -28,11 +15,8 @@ CREATE TABLE IF NOT EXISTS `administrateur` (
   PRIMARY KEY (`idadmin`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
--- --------------------------------------------------------
-
---
--- Structure de la table `categorie`
---
+INSERT INTO `administrateur` (`idadmin`, `login`, `mot_de_passe`) VALUES
+(1, 'admin', 'admin');
 
 DROP TABLE IF EXISTS `categorie`;
 CREATE TABLE IF NOT EXISTS `categorie` (
@@ -40,13 +24,18 @@ CREATE TABLE IF NOT EXISTS `categorie` (
   `categorie` varchar(45) NOT NULL,
   `description` varchar(45) NOT NULL,
   PRIMARY KEY (`idcategorie`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
--- --------------------------------------------------------
-
---
--- Structure de la table `competition`
---
+INSERT INTO `categorie` (`idcategorie`, `categorie`, `description`) VALUES
+(1, 'Avenirs', '2004 et apr&Atilde;&uml;s'),
+(2, 'Poussins', '2002 2003'),
+(3, 'Benjamins', '2000 2001'),
+(4, 'Minimes', '1998 1999'),
+(5, 'Cadets', '1996 1997'),
+(6, 'Junior', '1993 1994 1995'),
+(7, 'Seniors', '1992 et avant'),
+(8, 'C1', '25 &Atilde;&nbsp; 29 ans'),
+(9, 'C2', '30 &Atilde;&nbsp; 35');
 
 DROP TABLE IF EXISTS `competition`;
 CREATE TABLE IF NOT EXISTS `competition` (
@@ -57,13 +46,11 @@ CREATE TABLE IF NOT EXISTS `competition` (
   PRIMARY KEY (`idcompetition`),
   KEY `fk_competition_nageur1_idx` (`idnageur`),
   KEY `fk_competition_epreuve1_idx` (`idepreuve`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
--- --------------------------------------------------------
-
---
--- Structure de la table `epreuve`
---
+INSERT INTO `competition` (`idcompetition`, `annee`, `idnageur`, `idepreuve`) VALUES
+(1, 2013, 1, 1),
+(2, 2013, 2, 3);
 
 DROP TABLE IF EXISTS `epreuve`;
 CREATE TABLE IF NOT EXISTS `epreuve` (
@@ -72,13 +59,15 @@ CREATE TABLE IF NOT EXISTS `epreuve` (
   `distance` int(11) NOT NULL,
   PRIMARY KEY (`idepreuve`),
   KEY `fk_epreuve_type_de_nage_idx` (`idtype_de_nage`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
--- --------------------------------------------------------
-
---
--- Structure de la table `nageur`
---
+INSERT INTO `epreuve` (`idepreuve`, `idtype_de_nage`, `distance`) VALUES
+(1, 1, 100),
+(2, 1, 50),
+(3, 2, 100),
+(4, 2, 50),
+(5, 3, 100),
+(6, 3, 150);
 
 DROP TABLE IF EXISTS `nageur`;
 CREATE TABLE IF NOT EXISTS `nageur` (
@@ -90,13 +79,11 @@ CREATE TABLE IF NOT EXISTS `nageur` (
   `idcategorie` int(11) NOT NULL,
   PRIMARY KEY (`idnageur`),
   KEY `idcategorie` (`idcategorie`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
--- --------------------------------------------------------
-
---
--- Structure de la table `performance`
---
+INSERT INTO `nageur` (`idnageur`, `nom`, `prenom`, `date_de_naissance`, `sexe`, `idcategorie`) VALUES
+(1, 'KABA', 'N''faly', '1984-12-20', 'M', 7),
+(2, 'KABA', 'Mamady', '1985-12-20', 'M', 1);
 
 DROP TABLE IF EXISTS `performance`;
 CREATE TABLE IF NOT EXISTS `performance` (
@@ -109,47 +96,46 @@ CREATE TABLE IF NOT EXISTS `performance` (
   PRIMARY KEY (`idperformance`),
   KEY `fk_performance_nageur1_idx` (`idnageur`),
   KEY `fk_performance_epreuve1_idx` (`idepreuve`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
--- --------------------------------------------------------
-
---
--- Structure de la table `type_de_nage`
---
+INSERT INTO `performance` (`idperformance`, `points`, `temps`, `idnageur`, `idepreuve`, `annee`) VALUES
+(1, 123, '44.26', 1, 1, 2012),
+(2, 123, '51.67', 1, 1, 2012),
+(3, 123, '52.00', 1, 1, 2012),
+(4, 1, '49.79', 1, 2, 2012),
+(5, 1, '53.88', 1, 2, 2012),
+(6, 2, '54.10', 1, 2, 2012),
+(7, 3, '47.76', 1, 2, 2012),
+(8, 2, '44.30', 1, 1, 2012),
+(9, 23, '44.26', 2, 2, 2013);
 
 DROP TABLE IF EXISTS `type_de_nage`;
 CREATE TABLE IF NOT EXISTS `type_de_nage` (
   `idtype_de_nage` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(45) NOT NULL,
   PRIMARY KEY (`idtype_de_nage`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
---
--- Contraintes pour les tables exportées
---
+INSERT INTO `type_de_nage` (`idtype_de_nage`, `type`) VALUES
+(1, 'Brasse'),
+(2, 'Crawl'),
+(3, 'Papillon');
 
---
--- Contraintes pour la table `competition`
---
+
 ALTER TABLE `competition`
   ADD CONSTRAINT `competition_ibfk_8` FOREIGN KEY (`idnageur`) REFERENCES `nageur` (`idnageur`) ON DELETE CASCADE ON UPDATE NO ACTION,
   ADD CONSTRAINT `competition_ibfk_9` FOREIGN KEY (`idepreuve`) REFERENCES `epreuve` (`idepreuve`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
---
--- Contraintes pour la table `epreuve`
---
 ALTER TABLE `epreuve`
   ADD CONSTRAINT `epreuve_ibfk_3` FOREIGN KEY (`idtype_de_nage`) REFERENCES `type_de_nage` (`idtype_de_nage`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
---
--- Contraintes pour la table `nageur`
---
 ALTER TABLE `nageur`
   ADD CONSTRAINT `nageur_ibfk_1` FOREIGN KEY (`idcategorie`) REFERENCES `categorie` (`idcategorie`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
---
--- Contraintes pour la table `performance`
---
 ALTER TABLE `performance`
   ADD CONSTRAINT `performance_ibfk_5` FOREIGN KEY (`idnageur`) REFERENCES `nageur` (`idnageur`) ON DELETE CASCADE ON UPDATE NO ACTION,
   ADD CONSTRAINT `performance_ibfk_6` FOREIGN KEY (`idepreuve`) REFERENCES `epreuve` (`idepreuve`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
